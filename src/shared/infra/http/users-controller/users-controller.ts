@@ -25,48 +25,7 @@ export class UsersController {
       await this.registerUserUseCase.execute(user);
       return { message: 'User created successfully' };
     } catch (error) {
-      return { error: 'Internal server error' };
+      throw error;
     }
   }
 }
-/* 
-export class UsersController {
-    private registerUserUseCase: RegisterUserUseCase;
-
-    constructor(registerUserUseCase: RegisterUserUseCase) {
-        this.registerUserUseCase = registerUserUseCase;
-    }
-
-    async create(request: Request, response: Response): Promise<Response> {
-        const { name, email, password } = request.body;
-
-        const createUserDto = new CreateUserDto();
-        createUserDto.name = name;
-        createUserDto.email = email;
-        createUserDto.password = password;
-
-        const errors = await validate(createUserDto);
-
-        if (errors.length > 0) {
-            return response.status(400).json({ errors });
-        }
-
-        const user: IRegisterUser = {
-            id: '',
-            name: createUserDto.name,
-            email: createUserDto.email,
-            password: createUserDto.password,
-            password_hash: '',
-            createdAt: new Date(),
-        };
-
-        try {
-            await this.registerUserUseCase.execute(user);
-
-            return response.status(201).json({ message: 'User created successfully!' });
-        } catch (error) {
-            return response.status(500).json({ error: 'Internal server error' });
-        }
-    }
-}
- */

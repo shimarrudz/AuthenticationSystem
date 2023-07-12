@@ -1,0 +1,1 @@
+// Criar uma interface que terá todos os metodos que terao conexao com o banco

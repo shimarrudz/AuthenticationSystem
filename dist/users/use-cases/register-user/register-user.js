@@ -9,12 +9,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterUserUseCase = void 0;
 const common_1 = require("@nestjs/common");
 const client_1 = require("@prisma/client");
-const bcrypt_1 = require("bcrypt");
+const bcrypt = require("bcrypt");
 let RegisterUserUseCase = exports.RegisterUserUseCase = class RegisterUserUseCase {
     async execute(data) {
         const { name, email, password } = data;
         const prisma = new client_1.PrismaClient();
-        const password_hash = await bcrypt_1.default.hash(password, 10);
+        const password_hash = await bcrypt.hash(password, 10);
         await prisma.user.create({
             data: {
                 name,
@@ -22,7 +22,6 @@ let RegisterUserUseCase = exports.RegisterUserUseCase = class RegisterUserUseCas
                 password_hash,
             },
         });
-        await prisma.$disconnect();
     }
 };
 exports.RegisterUserUseCase = RegisterUserUseCase = __decorate([

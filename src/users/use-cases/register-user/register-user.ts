@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
+
 
 import { IRegisterUser } from "src/users/interfaces";
 
@@ -21,6 +22,6 @@ export class RegisterUserUseCase {
             },
         });
     
-        await prisma.$disconnect();
+        /* await prisma.$disconnect(); */
     }
 }

@@ -34,7 +34,7 @@ let UsersController = exports.UsersController = class UsersController {
             return { message: 'User created successfully' };
         }
         catch (error) {
-            return { error: 'Internal server error' };
+            throw error;
         }
     }
 };
