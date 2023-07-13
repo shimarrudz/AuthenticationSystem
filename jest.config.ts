@@ -4,6 +4,8 @@ const config: Config.InitialOptions = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   testMatch: ['**/*.spec.ts'],
+  "collectCoverage": true, 
+  "coverageReporters": ["lcov", "text"],
   moduleNameMapper: {
     '^src/(.*)$': '<rootDir>/src/$1',
   },
