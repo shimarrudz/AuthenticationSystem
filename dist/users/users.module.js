@@ -15,7 +15,7 @@ let UsersModule = exports.UsersModule = class UsersModule {
 };
 exports.UsersModule = UsersModule = __decorate([
     (0, common_1.Module)({
-        providers: [register_user_1.RegisterUserUseCase, prisma_user_repository_1.default],
+        providers: [register_user_1.RegisterUserUseCase, prisma_user_repository_1.UserRepository],
         controllers: [users_controller_1.UsersController],
     })
 ], UsersModule);

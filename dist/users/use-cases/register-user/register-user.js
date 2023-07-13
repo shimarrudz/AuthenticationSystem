@@ -31,6 +31,6 @@ let RegisterUserUseCase = exports.RegisterUserUseCase = class RegisterUserUseCas
 };
 exports.RegisterUserUseCase = RegisterUserUseCase = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_user_repository_1.default])
+    __metadata("design:paramtypes", [prisma_user_repository_1.UserRepository])
 ], RegisterUserUseCase);
 //# sourceMappingURL=register-user.js.map

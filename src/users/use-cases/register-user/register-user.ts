@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import * as bcrypt from "bcrypt"
 
 import { IRegisterUser } from "src/users/interfaces";
-import UserRepository from "src/users/infra/repositories/prisma/prisma-user-repository";
+import { UserRepository } from "src/users/infra/repositories/prisma/prisma-user-repository";
 
 @Injectable()
 export class RegisterUserUseCase {

@@ -2,7 +2,7 @@
 
 **Functional Requirements:**
 
-- [ ] The system should allow users to register by providing their name, email, and a password.
+- [X] The system should allow users to register by providing their name, email, and a password.
 - [ ] The system should send an email to the user to validate their registration.
 - [ ] The system should allow users to log in using their registered email and password.
 - [ ] The system should generate an authentication token and a refresh token upon user login.
@@ -16,10 +16,10 @@
 
 // Only one error is necessary in authentication.
 
-- [ ] Each user should have a unique email address to register in the system.
-- [ ] User passwords should be stored securely using encryption techniques.
-- [ ] Passwords should follow alphanumeric patterns, with a minimum length of 8 characters and a maximum length of 32 characters.
-- [ ] The existence of a user's email should be validated.
+- [X] Each user should have a unique email address to register in the system.
+- [X] User passwords should be stored securely using encryption techniques.
+- [X] Passwords should follow alphanumeric patterns, with a minimum length of 8 characters and a maximum length of 32 characters.
+- [X] The existence of a user's email should be validated.
 - [ ] During email registration, the email format "example@.com" should be validated.
 - [###] Authenticated users should only have access to and be able to update their own profile.
 - [ ] Two-factor authentication should be available via SMS or email.
@@ -32,9 +32,9 @@
 
 **Non-Functional Requirements:**
 
-- [ ] The system should be developed using the Nest.js framework and the TypeScript programming language.
-- [ ] The system should follow the principles of RESTful architecture.
-- [ ] The system should be secure, protecting users' personal information.
+- [X] The system should be developed using the Nest.js framework and the TypeScript programming language.
+- [X] The system should follow the principles of RESTful architecture.
+- [X] The system should be secure, protecting users' personal information.
 - [ ] The system should be testable, facilitating the writing and execution of automated tests to ensure code quality.
 - [ ] The system should have clear and comprehensive documentation using Swagger, including installation instructions, configuration details, and API usage guidelines.
 - [ ] The system should integrate with third-party services for email authentication, file storage, etc., when necessary.

@@ -4,7 +4,7 @@ import { PrismaClient, User } from '@prisma/client';
 import { IRegisterUser } from 'src/users/interfaces';
 import { IUserRepository } from 'src/users/interfaces/user-repository';
 
-export default class UserRepository implements IUserRepository{
+export class UserRepository implements IUserRepository{
   private prisma: PrismaClient;
 
   constructor() {
