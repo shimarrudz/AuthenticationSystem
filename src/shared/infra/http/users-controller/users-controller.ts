@@ -1,6 +1,4 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { Request, Response } from "express";
-import { validate } from "class-validator";
 
 import { CreateUserDto } from "src/users/dto/create-user.dto";
 import { RegisterUserUseCase } from "src/users/use-cases/register-user/register-user";
@@ -13,7 +11,6 @@ export class UsersController {
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<any> {
     const user: IRegisterUser = {
-      id: '',
       name: createUserDto.name,
       email: createUserDto.email,
       password: createUserDto.password,

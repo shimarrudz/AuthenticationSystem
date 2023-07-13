@@ -1,1 +1,1 @@
-export * from './IRegisterUser';
+export * from './register-user';

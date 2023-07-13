@@ -1,5 +1,5 @@
 import { IRegisterUser } from "src/users/interfaces";
-import UserRepository from "src/users/infra/repositories/user-repository";
+import UserRepository from "src/users/infra/repositories/prisma/prisma-user-repository";
 export declare class InMemoryUserRepository {
     private userRepository;
     private users;

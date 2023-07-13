@@ -1,1 +1,6 @@
-// Criar uma interface que terá todos os metodos que terao conexao com o banco
+import { Prisma, User } from "@prisma/client";
+
+export interface IUserRepository {
+  create(data: Prisma.UserCreateInput): Promise<User>;
+  findByEmail(email: string): Promise<User | null>;
+}

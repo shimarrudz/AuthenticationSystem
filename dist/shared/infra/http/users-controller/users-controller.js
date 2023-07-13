@@ -22,7 +22,6 @@ let UsersController = exports.UsersController = class UsersController {
     }
     async create(createUserDto) {
         const user = {
-            id: '',
             name: createUserDto.name,
             email: createUserDto.email,
             password: createUserDto.password,
