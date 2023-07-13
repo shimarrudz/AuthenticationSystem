@@ -45,7 +45,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "create", null);
 exports.UsersController = UsersController = __decorate([
-    (0, common_1.Controller)('users'),
+    (0, common_1.Controller)('auth/sign-up'),
     __metadata("design:paramtypes", [register_user_1.RegisterUserUseCase])
 ], UsersController);
 //# sourceMappingURL=users-controller.js.map

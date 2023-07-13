@@ -1,20 +1,26 @@
 ### Application Requirements
 
-**Functional Requirements:**
-
 **Road**
- - [X] The system should allow users to register by providing their name, email, and a password.
- - [ ] The system should send an email to the user to validate their registration.
+ 1 [X] The system should allow users to register by providing their name, email, and a password.
+ 2 [ ] The system should allow users to list their personal data
+ 3 [ ] The system should allow users to log in using their registered email and password.
+ 4 [ ] The system should generate an authentication token and a refresh token upon user login.
+ 5 [ ] The system should allow users to view their profile, including personal information.
+ 6 [ ] The system should allow users to view their profile, including personal information.
+7 [ ] The system should allow users to delete their account.
+8 [ ] The system should allow authenticated users to stay logged in without the need to log out.
+9 [ ] The system should support two-factor authentication via SMS or email for user login.
+10 [ ] The system should allow users to update their password. 
 
+**Functional Requirements:**
 - [X] The system should allow users to register by providing their name, email, and a password.
-- [ ] The system should send an email to the user to validate their registration.
 - [ ] The system should allow users to log in using their registered email and password.
 - [ ] The system should generate an authentication token and a refresh token upon user login.
-- [X] The system should allow users to view their profile, including personal information.
-- [X] The system should allow users to delete their account.
+- [ ] The system should allow users to view their profile, including personal information.
+- [ ] The system should allow users to delete their account.
 - [ ] The system should allow authenticated users to stay logged in without the need to log out.
 - [ ] The system should support two-factor authentication via SMS or email for user login.
-- [X] The system should allow users to update their password. **// Optional**
+- [ ] The system should allow users to update their password. **// Optional**
 
 **Business Rules:**
 

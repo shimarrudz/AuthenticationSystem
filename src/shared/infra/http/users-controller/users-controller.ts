@@ -4,7 +4,7 @@ import { CreateUserDto } from "src/users/dto/create-user.dto";
 import { RegisterUserUseCase } from "src/users/use-cases/register-user/register-user";
 import { IRegisterUser } from "src/users/interfaces";
 
-@Controller('users')
+@Controller('auth/sign-up')
 export class UsersController {
   constructor(private readonly registerUserUseCase: RegisterUserUseCase) {}
 
