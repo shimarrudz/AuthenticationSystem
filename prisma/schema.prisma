@@ -16,3 +16,15 @@ model User {
 
   @@map("users")
 }
+
+model Token {
+  id                  String   @id @default(uuid())
+  user_id             String
+  access_token        String
+  refreshToken        String
+  access_token_expiry DateTime
+  refreshTokenExpiry  DateTime
+  created_at          DateTime @default(now())
+
+  @@map("tokens")
+}
