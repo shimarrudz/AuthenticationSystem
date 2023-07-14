@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import { PrismaClient, User } from '@prisma/client';
 
 import { IRegisterUser } from 'src/users/interfaces';
-import { IUserRepository } from 'src/users/interfaces/user-repository';
+import { IUserRepository } from 'src/users/interfaces/user-repository.interface';
 
 export class UserRepository implements IUserRepository{
   private prisma: PrismaClient;

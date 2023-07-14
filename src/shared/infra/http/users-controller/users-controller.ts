@@ -2,7 +2,7 @@ import { Controller, Post, Body } from '@nestjs/common';
 
 import { CreateUserDto } from "src/users/dto/create-user.dto";
 import { RegisterUserUseCase } from "src/users/use-cases/register-user/register-user";
-import { IRegisterUser } from "src/users/interfaces";
+import { IRegisterUser } from 'src/users/interfaces';
 
 @Controller('auth/sign-up')
 export class UsersController {
