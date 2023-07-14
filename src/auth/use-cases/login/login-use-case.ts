@@ -5,6 +5,7 @@ import { compare } from 'bcrypt';
 import { LoginDto } from 'src/auth/dto/login-dto';
 import { IUserRepository } from 'src/users/interfaces/user-repository.interface';
 import { ITokenRepository } from 'src/auth/interfaces/token-repository.interface';
+import { TokenPayload } from 'src/auth/interfaces/token-payload.interface';
 
 @Injectable()
 export class LoginUseCase {
@@ -22,13 +23,16 @@ export class LoginUseCase {
       throw new UnauthorizedException('Invalid email or password');
     }
 
-    const passwordMatch = await compare(password, user.password);
+    const passwordMatch = await compare(password, user.password_hash);
     if (!passwordMatch) {
       throw new UnauthorizedException('Invalid email or password');
     }
 
-    const accessToken = this.jwtService.sign({ sub: user.id });
-    const refreshToken = this.jwtService.sign({ sub: user.id }, { expiresIn: '7d' });
+    const accessTokenPayload: TokenPayload = { sub: user.id };
+    const accessToken = this.jwtService.sign(accessTokenPayload);
+
+    const refreshTokenPayload: TokenPayload = { sub: user.id };
+    const refreshToken = this.jwtService.sign(refreshTokenPayload, { expiresIn: '7d' });
 
     await this.tokenRepository.createToken(user.id, accessToken, refreshToken);
 

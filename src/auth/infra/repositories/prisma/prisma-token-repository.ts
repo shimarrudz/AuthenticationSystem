@@ -1,20 +1,21 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Token } from '@prisma/client';
+import { ITokenRepository } from 'src/auth/interfaces/token-repository.interface';
 
-export class TokenRepository {
+export class TokenRepository implements ITokenRepository {
   private prisma: PrismaClient;
 
   constructor() {
     this.prisma = new PrismaClient();
   }
 
-  async createToken(userId: string, accessToken: string, refreshToken: string): Promise<void> {
+  async createToken(userId: string, accessToken: string, refreshToken: string): Promise<Token> {
     const accessTokenExpiry = new Date();
     accessTokenExpiry.setMinutes(accessTokenExpiry.getMinutes() + 10); // Definir expiração em 10 minutos
 
     const refreshTokenExpiry = new Date();
     refreshTokenExpiry.setMinutes(refreshTokenExpiry.getMinutes() + 10); // Definir expiração em 10 minutos
 
-    await this.prisma.token.create({
+    const createdToken = await this.prisma.token.create({
       data: {
         User: { connect: { id: userId } },
         access_token: accessToken,
@@ -23,5 +24,7 @@ export class TokenRepository {
         refresh_token_expiry: refreshTokenExpiry,
       },
     });
+
+    return createdToken;
   }
 }
