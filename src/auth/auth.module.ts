@@ -1,16 +1,27 @@
 import { Module } from '@nestjs/common';
-import { LoginUseCase } from './use-cases/login/login-use-case';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthController } from 'src/shared/infra/http/tokens-controller/token-controller';
+import { AuthController } from '../shared/infra/http/tokens-controller/token-controller';
+import { UserRepository } from './infra/repositories/prisma/prisma-user-repository';
+import { TokenRepository } from './infra/repositories/prisma/prisma-token-repository';
+import { LoginUseCase } from './use-cases/login/login-use-case';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
     JwtModule.register({
-      secret: 'YOUR_SECRET_KEY', // Substitua pela sua chave secreta real
-      signOptions: { expiresIn: '15m' }, // Defina o tempo de expiração do token de acesso
+      // ARRUMAR ISSO*******************************
+      /******************************************
+      ******************************** */
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '15m' },
     }),
   ],
   controllers: [AuthController],
-  providers: [LoginUseCase],
+  providers: [
+    LoginUseCase,
+    UserRepository,
+    TokenRepository,
+    JwtStrategy,
+  ],
 })
 export class AuthModule {}

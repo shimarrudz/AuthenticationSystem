@@ -2,10 +2,8 @@
 
 **Road**
  1 [X] The system should allow users to register by providing their name, email, and a password.
- 2 [ ] The system should allow users to list their personal data
  3 [ ] The system should allow users to log in using their registered email and password.
  4 [ ] The system should generate an authentication token and a refresh token upon user login.
- 5 [ ] The system should allow users to view their profile, including personal information.
  6 [ ] The system should allow users to view their profile, including personal information.
 7 [ ] The system should allow users to delete their account.
 8 [ ] The system should allow authenticated users to stay logged in without the need to log out.
