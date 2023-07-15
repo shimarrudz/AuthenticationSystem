@@ -1,14 +1,15 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { LoginDto } from 'src/auth/dto/login-dto';
-import { LoginUseCase } from 'src/auth/use-cases/login/login-use-case';
+import { Login } from 'src/auth/use-cases/login/login';
+import { IUserToken } from 'src/auth/interfaces';
+import { User } from '@prisma/client';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly loginUseCase: LoginUseCase) {}
+  constructor(private readonly loginUseCase: Login) {}
 
   @Post('login')
-  async login(@Body() loginDto: LoginDto): Promise<{ accessToken: string; refreshToken: string }> {
-    const { accessToken, refreshToken } = await this.loginUseCase.execute(loginDto);
-    return { accessToken, refreshToken };
+  async login(@Body() user: User): Promise<IUserToken> {
+    const userToken = await this.loginUseCase.execute(user);
+    return userToken;
   }
 }

@@ -14,21 +14,27 @@ model User {
   password_hash String
   created_at    DateTime @default(now())
 
-  token Token[]
+  refresh_tokens RefreshToken[]
 
   @@map("users")
 }
 
-model Token {
-  id                   String   @id @default(uuid())
-  user_id              String
-  access_token         String
-  refresh_token        String
-  access_token_expiry  DateTime
-  refresh_token_expiry DateTime
-  created_at           DateTime @default(now())
+model RefreshToken {
+  id         String    @id @default(uuid())
+  token      String    @unique
+  user_id    String
+  created_at DateTime  @default(now())
+  expires_at DateTime?
+  userId     String?
 
   User User? @relation(fields: [user_id], references: [id])
 
-  @@map("tokens")
+  @@map("refresh_tokens")
+}
+
+model RevokedToken {
+  id    String @id @default(uuid())
+  token String @unique
+
+  @@map("revoked_tokens")
 }
