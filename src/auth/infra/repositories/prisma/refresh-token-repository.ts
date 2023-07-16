@@ -25,7 +25,6 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
       },
     });
 
-    console.log("ERRORRRRRRRRRRR" + token);
     return refreshToken;
   }
 
