@@ -4,10 +4,15 @@ import * as bcrypt from 'bcrypt';
 
 import { RefreshTokenDto } from 'src/auth/dto';
 import { RefreshToken } from '@prisma/client';
+import { IRefreshTokenRepository } from 'src/auth/interfaces';
 
-@Injectable()
-export class RefreshTokenRepository {
-  constructor(private prisma: PrismaClient) {}
+
+export class RefreshTokenRepository implements IRefreshTokenRepository {
+  private prisma: PrismaClient;
+  
+  constructor() {
+    this.prisma = new PrismaClient();
+  }
 
   async createRefreshToken({
     user,
@@ -17,13 +22,15 @@ export class RefreshTokenRepository {
     const refreshToken = await this.prisma.refreshToken.create({
       data: {
         token: token,
-        user_id: user,
+        userId: user.id, // Atualizado para user.id em vez de user
         expires_at: new Date(Date.now() + expiresAt),
       },
     });
-
+  
     return refreshToken;
   }
+  
+  
 
   async findRefreshToken(token: string): Promise<RefreshToken> {
     const refreshToken = await this.prisma.refreshToken.findUnique({

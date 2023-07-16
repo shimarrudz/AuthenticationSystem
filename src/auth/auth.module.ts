@@ -1,14 +1,13 @@
-import { Module } from "@nestjs/common";
-import { JwtModule } from "@nestjs/jwt";
-import { AuthController } from "src/shared/infra/http/tokens-controller/token-controller";
-import { Login } from "./use-cases/login/login";
-import { RefreshTokenRepository } from "./infra/repositories/prisma/refresh-token-repository";
-import { RevokedTokenRepository } from "./infra/repositories/prisma/revoked-token-repository";
+import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { AuthController } from 'src/shared/infra/http/tokens-controller/token-controller';
+import { Login } from './use-cases/login/login';
+import { RefreshTokenRepository } from './infra/repositories/prisma';
 
 @Module({
   imports: [
     JwtModule.register({
-      secret: 'your-secret-key',
+      secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '5m' },
     }),
   ],
@@ -16,7 +15,6 @@ import { RevokedTokenRepository } from "./infra/repositories/prisma/revoked-toke
   providers: [
     Login,
     RefreshTokenRepository,
-    RevokedTokenRepository,
   ],
 })
 export class AuthModule {}

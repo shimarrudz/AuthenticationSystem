@@ -22,12 +22,12 @@ model User {
 model RefreshToken {
   id         String    @id @default(uuid())
   token      String    @unique
-  user_id    String
+  user       String    @default(uuid())
   created_at DateTime  @default(now())
   expires_at DateTime?
   userId     String?
 
-  User User? @relation(fields: [user_id], references: [id])
+  User User? @relation(fields: [user], references: [id])
 
   @@map("refresh_tokens")
 }

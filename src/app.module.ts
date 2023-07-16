@@ -3,6 +3,6 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [AuthModule],
+  imports: [UsersModule, AuthModule],
 })
 export class AppModule {}
