@@ -4,12 +4,11 @@ import { User } from '@prisma/client';
 export class RefreshTokenDto {
   @IsNotEmpty()
   @IsString()
-  user: User;
-
-  @IsNotEmpty()
   user_id: string;
+
+  
 
   @IsNotEmpty()
   @IsDate()
-  expiresAt: number;
+  expires_at: number;
 }

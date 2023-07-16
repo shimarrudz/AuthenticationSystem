@@ -1,13 +1,13 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
+
 import { RefreshTokenRepository } from 'src/auth/infra/repositories/prisma';
-import { IUserToken } from 'src/auth/interfaces';
+import { IUserToken, IJwtPayload } from 'src/auth/interfaces';
 
 @Injectable()
 export class Login {
   constructor(
-    @Inject(JwtService)
     private jwtService: JwtService,
     private refreshTokenRepository: RefreshTokenRepository,
   ) {}
@@ -23,7 +23,7 @@ export class Login {
   }
 
   private generateAccessToken(user: User): string {
-    const payload = {
+    const payload: IJwtPayload = {
       sub: user.id,
       email: user.email,
     };
@@ -36,9 +36,8 @@ export class Login {
   private async generateRefreshToken(user: User): Promise<string> {
     const refreshTokenExpiresIn = 2 * 24 * 60 * 60 * 500;
     const refreshToken = await this.refreshTokenRepository.createRefreshToken({
-      user: user,
       user_id: user.id,
-      expiresAt: refreshTokenExpiresIn,
+      expires_at: refreshTokenExpiresIn,
     });
   
     return refreshToken.token;

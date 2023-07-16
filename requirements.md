@@ -8,7 +8,8 @@
 7 [ ] The system should allow users to delete their account.
 8 [ ] The system should allow authenticated users to stay logged in without the need to log out.
 9 [ ] The system should support two-factor authentication via SMS or email for user login.
-10 [ ] The system should allow users to update their password. 
+10 [ ] The system should allow users to update their password.
+11 [ ] Apply password validator 
 
 **Functional Requirements:**
 - [X] The system should allow users to register by providing their name, email, and a password.
