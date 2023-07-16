@@ -10,3 +10,17 @@ export class Refresh {
         private refreshTokenRepository: RefreshTokenRepository,
     ) {}
 }
+
+    async execute(refreshToken: string): Promise<IUserToken> {
+        const user = await this.validateRefreshToken(refreshToken);
+
+        const accessToken = this.generateAccessToken(user);
+        const newRefreshToken = await this.generateRefreshToken(user);
+    
+        return {
+            accessToken,
+            refreshToken: newRefreshToken,
+        };
+    }
+
+    
