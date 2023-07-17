@@ -1,5 +1,5 @@
 import * as bcrypt from "bcrypt";
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 import { IRegisterUser } from "src/users/interfaces";
 import { IUserRepository } from "src/users/interfaces/user-repository.interface";
