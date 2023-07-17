@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
+
 import { AuthController } from 'src/shared/infra/http/tokens-controller/token-controller';
 import { Login } from './use-cases/login/login';
 import { RefreshTokenRepository } from './infra/repositories/prisma';
@@ -18,7 +19,7 @@ import { Refresh } from './use-cases/refresh-token/refresh-token';
     Login,
     RefreshTokenRepository,
     Logout,
-    Refresh
+    Refresh,
   ],
 })
 export class AuthModule {}

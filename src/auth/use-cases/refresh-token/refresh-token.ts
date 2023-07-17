@@ -1,7 +1,11 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import * as jwt from 'jsonwebtoken';
+
 import { RefreshTokenRepository } from 'src/auth/infra/repositories/prisma';
-import { IUserToken, IJwtPayload, IUserFromJwt } from '../../interfaces';
+import { IUserToken, IUserFromJwt } from '../../interfaces';
+import { IJwtPayload } from '../../interfaces';
+
 
 @Injectable()
 export class Refresh {
@@ -14,18 +18,19 @@ export class Refresh {
     const user = await this.validateRefreshToken(refreshToken);
 
     const accessToken = this.generateAccessToken(user);
-    const newRefreshToken = await this.generateRefreshToken(user);
 
     return {
       accessToken,
-      refreshToken: newRefreshToken,
+      refreshToken
     };
   }
 
   private async validateRefreshToken(refreshToken: string): Promise<IUserFromJwt> {
-    const payload = this.jwtService.verify<IJwtPayload>(refreshToken);
+    const decodedToken: any = jwt.verify(refreshToken, process.env.JWT_SECRET);
 
-    const user = await this.refreshTokenRepository.findUserByRefreshToken(payload.sub, refreshToken);
+    console.log('DECODED TOKEN:', decodedToken);
+
+    const user = await this.refreshTokenRepository.findUserById(decodedToken.sub);
 
     if (!user) {
       throw new UnauthorizedException('Refresh token inválido!');
@@ -41,17 +46,7 @@ export class Refresh {
     };
 
     return this.jwtService.sign(payload, {
-      expiresIn: '5m',
+      expiresIn: '10m',
     });
-  }
-
-  private async generateRefreshToken(user: IUserFromJwt): Promise<string> {
-    const refreshTokenExpiresIn = 2 * 24 * 60 * 60 * 500;
-    const refreshToken = await this.refreshTokenRepository.createRefreshToken({
-      user_id: user.id,
-      expires_at: refreshTokenExpiresIn,
-    });
-
-    return refreshToken.token;
   }
 }

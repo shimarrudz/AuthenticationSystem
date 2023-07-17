@@ -1,15 +1,15 @@
 ### Application Requirements
 
 **Road**
- 1 [X] The system should allow users to register by providing their name, email, and a password.
- 3 [ ] The system should allow users to log in using their registered email and password.
- 4 [ ] The system should generate an authentication token and a refresh token upon user login.
- 6 [ ] The system should allow users to view their profile, including personal information.
-7 [ ] The system should allow users to delete their account.
-8 [ ] The system should allow authenticated users to stay logged in without the need to log out.
-9 [ ] The system should support two-factor authentication via SMS or email for user login.
-10 [ ] The system should allow users to update their password.
-11 [ ] Apply password validator 
+- [X] The system should allow users to register by providing their name, email, and a password.
+- [ ] The system should allow users to log in using their registered email and password.
+- [ ] The system should generate an authentication token and a refresh token upon user login.
+- [ ] The system should allow users to view their profile, including personal information.
+- [ ] The system should allow users to delete their account.
+- [ ] The system should allow authenticated users to stay logged in without the need to log out.
+- [ ] The system should support two-factor authentication via SMS or email for user login.
+- [ ] The system should allow users to update their password.
+- [ ] Apply password validator 
 
 **Functional Requirements:**
 - [X] The system should allow users to register by providing their name, email, and a password.
@@ -20,6 +20,7 @@
 - [ ] The system should allow authenticated users to stay logged in without the need to log out.
 - [ ] The system should support two-factor authentication via SMS or email for user login.
 - [ ] The system should allow users to update their password. **// Optional**
+- [ ] Pass user_id on login post by query params
 
 **Business Rules:**
 

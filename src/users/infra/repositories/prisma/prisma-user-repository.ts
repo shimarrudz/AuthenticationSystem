@@ -1,10 +1,10 @@
-import * as bcrypt from 'bcrypt';
-import { PrismaClient, User } from '@prisma/client';
+import * as bcrypt from "bcrypt";
+import { PrismaClient, User } from "@prisma/client";
 
-import { IRegisterUser } from 'src/users/interfaces';
-import { IUserRepository } from 'src/users/interfaces/user-repository.interface';
+import { IRegisterUser } from "src/users/interfaces";
+import { IUserRepository } from "src/users/interfaces/user-repository.interface";
 
-export class UserRepository implements IUserRepository{
+export class UserRepository implements IUserRepository {
   private prisma: PrismaClient;
 
   constructor() {
@@ -22,12 +22,16 @@ export class UserRepository implements IUserRepository{
       },
     });
 
-    return user
-  }
-
-  async findByEmail(email: string): Promise<User | null> {
-    const user = await this.prisma.user.findUnique({ where: { email } });
     return user;
   }
-  
+
+  async findByEmail(email: string) {
+    const user = await this.prisma.user.findUnique({ where: { email} });
+    return user;
+  }
+
+  async getUserById(id: string) {
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    return user;
+  }
 }

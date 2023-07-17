@@ -14,11 +14,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
+const get_user_1 = require("../../../../users/use-cases/get_user/get-user");
 const create_user_dto_1 = require("../../../../users/dto/create-user.dto");
 const register_user_1 = require("../../../../users/use-cases/register-user/register-user");
 let UsersController = exports.UsersController = class UsersController {
-    constructor(registerUserUseCase) {
+    constructor(registerUserUseCase, getUserUseCase) {
         this.registerUserUseCase = registerUserUseCase;
+        this.getUserUseCase = getUserUseCase;
     }
     async create(createUserDto) {
         const user = {
@@ -36,16 +38,27 @@ let UsersController = exports.UsersController = class UsersController {
             throw error;
         }
     }
+    async getUser(params) {
+        return this.getUserUseCase.execute(params);
+    }
 };
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.Post)('signup'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getUser", null);
 exports.UsersController = UsersController = __decorate([
-    (0, common_1.Controller)('auth/sign-up'),
-    __metadata("design:paramtypes", [register_user_1.RegisterUserUseCase])
+    (0, common_1.Controller)('auth'),
+    __metadata("design:paramtypes", [register_user_1.RegisterUserUseCase,
+        get_user_1.GetUserUseCase])
 ], UsersController);
 //# sourceMappingURL=users-controller.js.map

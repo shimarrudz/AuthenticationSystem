@@ -1,14 +1,20 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body } from '@nestjs/common';
 
+import { GetUserUseCase } from 'src/users/use-cases/get_user/get-user';
+import { GetUserDto } from 'src/users/dto/get-user-dto';
+import { User } from 'src/users/interfaces/user';
 import { CreateUserDto } from "src/users/dto/create-user.dto";
 import { RegisterUserUseCase } from "src/users/use-cases/register-user/register-user";
 import { IRegisterUser } from 'src/users/interfaces';
 
-@Controller('auth/sign-up')
+@Controller('auth')
 export class UsersController {
-  constructor(private readonly registerUserUseCase: RegisterUserUseCase) {}
+  constructor(
+    private readonly registerUserUseCase: RegisterUserUseCase,
+    private readonly getUserUseCase: GetUserUseCase
+    ) {}
 
-  @Post()
+  @Post('signup')
   async create(@Body() createUserDto: CreateUserDto): Promise<any> {
     const user: IRegisterUser = {
       name: createUserDto.name,
@@ -24,5 +30,10 @@ export class UsersController {
     } catch (error) {
       throw error;
     }
+  }
+
+  @Get(':id')
+  async getUser(@Param('id') params: string): Promise<User> {
+    return this.getUserUseCase.execute(params)
   }
 }
