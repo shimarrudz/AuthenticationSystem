@@ -2,14 +2,14 @@
 
 **Road**
 - [X] The system should allow users to register by providing their name, email, and a password.
-- [ ] The system should allow users to log in using their registered email and password.
-- [ ] The system should generate an authentication token and a refresh token upon user login.
-- [ ] The system should allow users to view their profile, including personal information.
+- [X] The system should allow users to log in using their registered email and password.
+- [X] The system should generate an authentication token and a refresh token upon user login.
+- [X] The system should allow users to view their profile, including personal information.
 - [ ] The system should allow users to delete their account.
-- [ ] The system should allow authenticated users to stay logged in without the need to log out.
+- [X] The system should allow authenticated users to stay logged in without the need to log out.
 - [ ] The system should support two-factor authentication via SMS or email for user login.
 - [ ] The system should allow users to update their password.
-- [ ] Apply password validator 
+- [ ] Apply password validator.
 
 **Functional Requirements:**
 - [X] The system should allow users to register by providing their name, email, and a password.
