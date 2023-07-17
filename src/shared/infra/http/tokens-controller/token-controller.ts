@@ -22,8 +22,15 @@ export class AuthController {
   }
 }
 
-@Post('refresh')
-async refresh(@Body() { refreshToken }: RefreshTokenDto): Promise<IUserToken> {
-  const userToken = await this.refreshTokenUseCase.execute(refreshToken);
-  return userToken;
-}
+  @Post('refresh')
+  async refresh(@Body() { refreshToken }: RefreshTokenDto): Promise<IUserToken> {
+    const userToken = await this.refreshTokenUseCase.execute(refreshToken);
+    return userToken;
+  }
+
+  @Post('logout')
+  async Logout(@Body() { refreshToken }: RefreshTokenDto): Promise<void> {
+    await this.logoutUseCase.execute(refreshToken);
+  }
+  }
+
