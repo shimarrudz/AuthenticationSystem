@@ -6,8 +6,6 @@ export class RefreshTokenDto {
   @IsString()
   user_id: string;
 
-  
-
   @IsNotEmpty()
   @IsDate()
   expires_at: number;

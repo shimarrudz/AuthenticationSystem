@@ -12,25 +12,22 @@ export class AuthController {
   constructor(
     private readonly loginUseCase: Login,
     private readonly refreshTokenUseCase: Refresh,
-    private readonly logoutUseCase: Logout
-    ) {}
+    private readonly logoutUseCase: Logout,
+  ) {}
 
   @Post('login')
   async login(@Body() user: User): Promise<IUserToken> {
     const userToken = await this.loginUseCase.execute(user);
     return userToken;
   }
-}
 
   @Post('refresh')
-  async refresh(@Body() { refreshToken }: RefreshTokenDto): Promise<IUserToken> {
-    const userToken = await this.refreshTokenUseCase.execute(refreshToken);
-    return userToken;
+  async refresh(@Body('refreshToken') refreshToken: string): Promise<IUserToken> {
+    return this.refreshTokenUseCase.execute(refreshToken);
   }
 
   @Post('logout')
-  async Logout(@Body() { refreshToken }: RefreshTokenDto): Promise<void> {
+  async logout(@Body('refreshToken') refreshToken : string): Promise<void> {
     await this.logoutUseCase.execute(refreshToken);
   }
-  }
-
+}
