@@ -7,5 +7,5 @@ export declare class UsersController {
     private readonly getUserUseCase;
     constructor(registerUserUseCase: RegisterUserUseCase, getUserUseCase: GetUserUseCase);
     create(createUserDto: CreateUserDto): Promise<any>;
-    getUser(params: string): Promise<User>;
+    getUser(user_id: string): Promise<User>;
 }

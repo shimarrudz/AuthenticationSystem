@@ -33,7 +33,7 @@ export class UsersController {
   }
 
   @Get(':id')
-  async getUser(@Param('id') params: string): Promise<User> {
-    return this.getUserUseCase.execute(params)
+  async getUser(@Param('id') user_id: string): Promise<User> {
+    return this.getUserUseCase.execute(user_id)
   }
 }

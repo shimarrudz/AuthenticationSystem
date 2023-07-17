@@ -38,8 +38,8 @@ let UsersController = exports.UsersController = class UsersController {
             throw error;
         }
     }
-    async getUser(params) {
-        return this.getUserUseCase.execute(params);
+    async getUser(user_id) {
+        return this.getUserUseCase.execute(user_id);
     }
 };
 __decorate([
