@@ -3,6 +3,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from 'src/shared/infra/http/tokens-controller/token-controller';
 import { Login } from './use-cases/login/login';
 import { RefreshTokenRepository } from './infra/repositories/prisma';
+import { Logout } from './use-cases/logout/logout';
+import { Refresh } from './use-cases/refresh-token/refresh-token';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { RefreshTokenRepository } from './infra/repositories/prisma';
   providers: [
     Login,
     RefreshTokenRepository,
+    Logout,
+    Refresh
   ],
 })
 export class AuthModule {}
