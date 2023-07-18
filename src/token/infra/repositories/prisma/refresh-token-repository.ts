@@ -1,8 +1,8 @@
 import { PrismaClient, RefreshToken } from "@prisma/client";
 import * as crypto from 'node:crypto'
 
-import { RefreshTokenDto } from "src/auth/dto";
-import { IRefreshTokenRepository } from "src/auth/interfaces";
+import { RefreshTokenDto } from "src/token/dto/refresh-token-dto";
+import { IRefreshTokenRepository } from "src/token/interfaces";
 import { IUserFromJwt } from "src/auth/interfaces";
 
 export class RefreshTokenRepository implements IRefreshTokenRepository {

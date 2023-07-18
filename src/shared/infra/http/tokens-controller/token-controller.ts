@@ -1,13 +1,13 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { User } from '@prisma/client';
 
-import { Login } from 'src/auth/use-cases/login/login';
-import { IUserToken } from 'src/auth/interfaces';
-import { Logout } from 'src/auth/use-cases/logout/logout';
-import { Refresh } from 'src/auth/use-cases/refresh-token/refresh-token';
+import { Login } from 'src/token/use-cases';
+import { IUserToken } from 'src/token/interfaces';
+import { Logout } from 'src/token/use-cases';
+import { Refresh } from 'src/token/use-cases';
 
 @Controller('auth')
-export class AuthController {
+export class TokenController {
   constructor(
     private readonly loginUseCase: Login,
     private readonly refreshTokenUseCase: Refresh,

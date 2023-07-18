@@ -13,7 +13,7 @@ const users_controller_1 = require("../shared/infra/http/users-controller/users-
 const prisma_user_repository_1 = require("./infra/repositories/prisma/prisma-user-repository");
 const get_user_1 = require("./use-cases/get-user/get-user");
 const soft_delete_1 = require("./use-cases/soft-delete/soft-delete");
-const prisma_1 = require("../auth/infra/repositories/prisma");
+const prisma_1 = require("../token/infra/repositories/prisma");
 let UsersModule = exports.UsersModule = class UsersModule {
 };
 exports.UsersModule = UsersModule = __decorate([

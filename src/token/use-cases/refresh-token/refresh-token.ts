@@ -2,9 +2,10 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as jwt from 'jsonwebtoken';
 
-import { RefreshTokenRepository } from 'src/auth/infra/repositories/prisma';
-import { IUserToken, IUserFromJwt } from '../../interfaces';
-import { IJwtPayload } from '../../interfaces';
+import { RefreshTokenRepository } from 'src/token/infra/repositories/prisma';
+import { IUserFromJwt } from '../../../auth/interfaces';
+import { IUserToken } from 'src/token/interfaces';
+import { IJwtPayload } from '../../../auth/interfaces';
 
 
 @Injectable()

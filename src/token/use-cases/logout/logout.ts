@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { RefreshTokenRepository } from "src/auth/infra/repositories/prisma";
+import { RefreshTokenRepository } from "src/token/infra/repositories/prisma";
 
 @Injectable()
 export class Logout {

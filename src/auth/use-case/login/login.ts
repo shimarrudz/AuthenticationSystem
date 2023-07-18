@@ -2,15 +2,15 @@ import { Injectable, } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 
-import { RefreshTokenRepository } from 'src/auth/infra/repositories/prisma';
-import { IUserToken, IJwtPayload } from 'src/auth/interfaces';
+import { RefreshTokenRepository } from 'src/token/infra/repositories/prisma';
+import {IJwtPayload } from 'src/auth/interfaces';
+import { IUserToken } from 'src/token/interfaces';
 
 @Injectable()
 export class Login {
   constructor(
     private jwtService: JwtService,
-    private refreshTokenRepository: RefreshTokenRepository,
-  ) {}
+    ) {}
 
   async execute(user: User): Promise<IUserToken> {
     const accessToken = this.generateAccessToken(user);

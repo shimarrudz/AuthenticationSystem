@@ -34,8 +34,9 @@ export class UsersController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   async getUser(@Param('id') user_id: string): Promise<User> {
     return this.getUserUseCase.execute(user_id)
   }

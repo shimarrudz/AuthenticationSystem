@@ -10,6 +10,8 @@
 - [ ] Protect Routes.
 - [ ] The system should support two-factor authentication via SMS or email for user login.
 - [ ] The system should allow users to update their password.
+- [ ] Block refreshToken access instead of access
+- [ ] Access token can be valid just for one user
 - [ ] Apply password validator and e-mail example@gmail.com.
 - [ ] Review crypto or bcrypt
 - [ ] Apply Dependencie Inversion.

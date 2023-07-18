@@ -1,4 +1,4 @@
-import { RefreshTokenDto } from "../dto";
+import { RefreshTokenDto } from "../dto/refresh-token-dto";
 import { RefreshToken } from "@prisma/client";
 
 export abstract class IRefreshTokenRepository {

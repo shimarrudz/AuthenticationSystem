@@ -1,4 +1,17 @@
-import {
+import { Injectable, ExecutionContext } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
+import { Observable } from "rxjs";
+
+@Injectable()
+export class JwtAuthGuard extends AuthGuard('jwt') {
+  canActivate(context: ExecutionContext) {
+    // Custom logic like checktoken expiration
+    return super.canActivate(context);
+  }
+}
+
+
+/* import {
     ExecutionContext,
     Injectable,
     UnauthorizedException,
@@ -7,7 +20,7 @@ import {
   import { AuthGuard } from '@nestjs/passport';
   
   import { IS_PUBLIC_KEY } from '../decorators';
-  import { RevokedTokenRepository } from '../infra/repositories/prisma/revoked-token-repository';
+  import { RevokedTokenRepository } from '../../token/infra/repositories/prisma/revoked-token-repository';
 
   @Injectable()
   export class JwtAuthGuard extends AuthGuard('jwt') {
@@ -46,4 +59,4 @@ import {
       });
     }
   }
-  
+   */
