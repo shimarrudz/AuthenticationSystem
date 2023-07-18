@@ -11,12 +11,15 @@ const common_1 = require("@nestjs/common");
 const register_user_1 = require("./use-cases/register-user/register-user");
 const users_controller_1 = require("../shared/infra/http/users-controller/users-controller");
 const prisma_user_repository_1 = require("./infra/repositories/prisma/prisma-user-repository");
-const get_user_1 = require("./use-cases/get_user/get-user");
+const get_user_1 = require("./use-cases/get-user/get-user");
+const soft_delete_1 = require("./use-cases/soft-delete/soft-delete");
+const auth_module_1 = require("../auth/auth.module");
 let UsersModule = exports.UsersModule = class UsersModule {
 };
 exports.UsersModule = UsersModule = __decorate([
     (0, common_1.Module)({
-        providers: [register_user_1.RegisterUserUseCase, prisma_user_repository_1.UserRepository, get_user_1.GetUserUseCase],
+        imports: [auth_module_1.AuthModule],
+        providers: [register_user_1.RegisterUserUseCase, prisma_user_repository_1.UserRepository, get_user_1.GetUserUseCase, soft_delete_1.SoftDeleteUserUseCase],
         controllers: [users_controller_1.UsersController],
     })
 ], UsersModule);

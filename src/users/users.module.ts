@@ -3,10 +3,13 @@ import { Module } from "@nestjs/common";
 import { RegisterUserUseCase } from "./use-cases/register-user/register-user";
 import { UsersController } from "src/shared/infra/http/users-controller/users-controller";
 import { UserRepository } from "./infra/repositories/prisma/prisma-user-repository";
-import { GetUserUseCase } from "./use-cases/get_user/get-user";
+import { GetUserUseCase } from "./use-cases/get-user/get-user";
+import { SoftDeleteUserUseCase } from "./use-cases/soft-delete/soft-delete";
+import { AuthModule } from "src/auth/auth.module";
 
 @Module({
-  providers: [RegisterUserUseCase, UserRepository, GetUserUseCase],
+  imports: [AuthModule],
+  providers: [RegisterUserUseCase, UserRepository, GetUserUseCase, SoftDeleteUserUseCase],
   controllers: [UsersController],
 })
 export class UsersModule {}

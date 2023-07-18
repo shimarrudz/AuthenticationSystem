@@ -14,13 +14,16 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
-const get_user_1 = require("../../../../users/use-cases/get_user/get-user");
+const get_user_1 = require("../../../../users/use-cases/get-user/get-user");
 const create_user_dto_1 = require("../../../../users/dto/create-user.dto");
 const register_user_1 = require("../../../../users/use-cases/register-user/register-user");
+const soft_delete_1 = require("../../../../users/use-cases/soft-delete/soft-delete");
+const guards_1 = require("../../../../auth/guards");
 let UsersController = exports.UsersController = class UsersController {
-    constructor(registerUserUseCase, getUserUseCase) {
+    constructor(registerUserUseCase, getUserUseCase, softDeleteUseCase) {
         this.registerUserUseCase = registerUserUseCase;
         this.getUserUseCase = getUserUseCase;
+        this.softDeleteUseCase = softDeleteUseCase;
     }
     async create(createUserDto) {
         const user = {
@@ -41,6 +44,10 @@ let UsersController = exports.UsersController = class UsersController {
     async getUser(user_id) {
         return this.getUserUseCase.execute(user_id);
     }
+    async deleteUser(user_id) {
+        await this.softDeleteUseCase.execute(user_id);
+        return { message: 'User soft deleted successfully' };
+    }
 };
 __decorate([
     (0, common_1.Post)('signup'),
@@ -50,15 +57,24 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "create", null);
 __decorate([
+    (0, common_1.UseGuards)(guards_1.JwtAuthGuard),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getUser", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "deleteUser", null);
 exports.UsersController = UsersController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [register_user_1.RegisterUserUseCase,
-        get_user_1.GetUserUseCase])
+        get_user_1.GetUserUseCase,
+        soft_delete_1.SoftDeleteUserUseCase])
 ], UsersController);
 //# sourceMappingURL=users-controller.js.map

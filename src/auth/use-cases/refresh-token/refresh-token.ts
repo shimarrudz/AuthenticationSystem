@@ -26,6 +26,10 @@ export class Refresh {
   }
 
   private async validateRefreshToken(refreshToken: string): Promise<IUserFromJwt> {
+    const token = await this.refreshTokenRepository.findRefreshToken(refreshToken);
+    if(!token) {
+      throw new Error('Token not found')
+    }
     const decodedToken: any = jwt.verify(refreshToken, process.env.JWT_SECRET);
 
     console.log('DECODED TOKEN:', decodedToken);
