@@ -1,7 +1,5 @@
-import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
-@Injectable()
 export class RevokedTokenRepository {
   constructor(private prisma: PrismaClient) {}
 
@@ -10,10 +8,12 @@ export class RevokedTokenRepository {
   }
 
   async isTokenRevoked(token: string): Promise<boolean> {
+    if (!this.prisma.revokedToken) {
+      throw new Error('Prisma revokedToken not defined');
+    }
     const revokedToken = await this.prisma.revokedToken.findUnique({
       where: { token: token },
     });
     return !!revokedToken;
-
   }
 }

@@ -34,12 +34,14 @@ export class Login {
   }
 
   private async generateRefreshToken(user: User): Promise<string> {
-    const refreshTokenExpiresIn = 2 * 24 * 60 * 60 * 500;
-    const refreshToken = await this.refreshTokenRepository.createRefreshToken({
-      user_id: user.id,
-      expires_at: refreshTokenExpiresIn,
-    });
-  
-    return refreshToken.token;
+    const payload: IJwtPayload = {
+      sub: user.id,
+      email: user.email
+    };
+
+    return this.jwtService.sign(payload, {
+      expiresIn: '30s',
+    })
+
   }
 }

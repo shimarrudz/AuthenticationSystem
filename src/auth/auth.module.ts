@@ -21,8 +21,9 @@ import { RevokedTokenRepository } from './infra/repositories/prisma';
     RefreshTokenRepository,
     Logout,
     Refresh,
-    RefreshTokenRepository,
+    RevokedTokenRepository,
   ],
-  exports: [RevokedTokenRepository],
+  exports: [RevokedTokenRepository]
+  
 })
 export class AuthModule {}

@@ -15,6 +15,7 @@
 - [ ] Apply Dependencie Inversion.
 - [ ] Change everything to english.
 - [ ] Apply tests unit and e2e.
+- [ ] Refactor structure code
 - [ ] Import Path.
 - [ ] Refactor code.
 
