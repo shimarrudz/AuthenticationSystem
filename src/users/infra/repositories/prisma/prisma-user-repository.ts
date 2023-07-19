@@ -3,8 +3,6 @@ import { PrismaClient, User } from "@prisma/client";
 
 import { IRegisterUser, IUserRepository } from "@/users/interfaces";
 
-
-
 export class UserRepository implements IUserRepository {
   private prisma: PrismaClient;
 

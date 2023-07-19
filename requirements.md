@@ -13,25 +13,23 @@
 - [X] Apply password validator and e-mail example@gmail.com.
 - [X] Review crypto or bcrypt
 - [ ] Apply Dependencie Inversion.
-- [ ] Change everything to english.
+- [X] Change everything to english.
 - [ ] Apply tests unit and e2e.
-- [ ] Refactor structure code
-- [ ] Import Path.
+- [X] Refactor structure code
+- [X] Import Path Maping.
 - [ ] Make refresh token exclusive
 - [ ] Refactor code.
+
+**Diferentials**
 - [ ] The system should support two-factor authentication via SMS or email for user login.
 - [ ] The system should allow users to update their password.
 
 **Functional Requirements:**
 - [X] The system should allow users to register by providing their name, email, and a password.
-- [ ] The system should allow users to log in using their registered email and password.
-- [ ] The system should generate an authentication token and a refresh token upon user login.
-- [ ] The system should allow users to view their profile, including personal information.
-- [ ] The system should allow users to delete their account.
-- [ ] The system should allow authenticated users to stay logged in without the need to log out.
-- [ ] The system should support two-factor authentication via SMS or email for user login.
-- [ ] The system should allow users to update their password. **// Optional**
-- [ ] Pass user_id on login post by query params
+- [X] The system should allow users to log in using their registered email and password.
+- [X] The system should generate an authentication token and a refresh token upon user login.
+- [X] The system should allow users to view their profile, including personal information.
+- [X] The system should allow users to soft delete their account.
 
 **Business Rules:**
 
