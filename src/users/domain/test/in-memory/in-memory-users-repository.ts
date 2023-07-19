@@ -1,22 +1,49 @@
-import { UserDto } from "../../dto";
-import { UserRepository } from "src/users/infra/repositories/prisma/prisma-user-repository";
+import * as bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from 'uuid';
 
-export class InMemoryUserRepository {
-  private userRepository: UserRepository;
-  private users: UserDto[] = [];
+import { IUserRepository } from '@/users/domain/interfaces';
+import { UserDto } from '@/users/domain/dto';
+import { User } from '@prisma/client';
 
-  constructor(userRepository: UserRepository) {
-    this.userRepository = userRepository;
+export class InMemoryUserRepository implements IUserRepository {
+  private users: User[];
+
+  constructor() {
+    this.users = [];
   }
 
-  async create(data: UserDto): Promise<void> {
-    this.users.push(data);
-    await this.userRepository.create(data);
+  async create(data: UserDto): Promise<User> {
+    const { name, email, password } = data;
+    const id = uuidv4();
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    const newUser: User = {
+      id,
+      name,
+      email,
+      password_hash: passwordHash,
+      created_at: new Date(),
+      deleted: false,
+    };
+
+    this.users.push(newUser);
+    return newUser;
   }
 
-  async findByEmail(email: string): Promise<UserDto> {
-    const user = this.users.find((u) => u.email === email);
+  async findByEmail(email: string): Promise<User | null> {
+    const user = this.users.find((user) => user.email === email && !user.deleted);
     return user || null;
   }
 
+  async getUserById(id: string): Promise<User | null> {
+    const user = this.users.find((user) => user.id === id && !user.deleted);
+    return user || null;
+  }
+
+  async softDeleteUser(id: string): Promise<void> {
+    const user = this.users.find((user) => user.id === id && !user.deleted);
+    if (user) {
+      user.deleted = true;
+    }
+  }
 }

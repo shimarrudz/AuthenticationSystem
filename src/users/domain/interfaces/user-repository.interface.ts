@@ -1,8 +1,9 @@
-import { Prisma, User } from "@prisma/client";
+import { User } from '@prisma/client';
+import { UserDto } from '../dto';
 
 export interface IUserRepository {
-  create(data: Prisma.UserCreateInput): Promise<User>;
+  create(data: UserDto): Promise<User>;
   findByEmail(email: string): Promise<User | null>;
-  getUserById(user_id: string): Promise<User>;
-  softDeleteUser(user_id: string): Promise<void>;
+  getUserById(id: string): Promise<User | null>;
+  softDeleteUser(id: string): Promise<void>;
 }

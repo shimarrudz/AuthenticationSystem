@@ -11,7 +11,7 @@ export class UserRepository implements IUserRepository {
     this.prisma = new PrismaClient();
   }
 
-  async create(data: UserDto) {
+  async create(data: UserDto): Promise<User | null> {
     const passwordHash = await bcrypt.hash(data.password, 10);
     const user = await this.prisma.user.create({
       data: {
@@ -25,12 +25,12 @@ export class UserRepository implements IUserRepository {
     return user;
   }
 
-  async findByEmail(email: string) {
+  async findByEmail(email: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({ where: { email} });
     return user;
   }
 
-  async getUserById(id: string) : Promise<User | null> {
+  async getUserById(id: string): Promise<User | null> {
     const user = await this.prisma.user.findFirst({
       where: {
         id: id,

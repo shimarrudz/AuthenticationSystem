@@ -54,7 +54,7 @@ export class Refresh {
     };
 
     return this.jwtService.sign(payload, {
-      expiresIn: '10m',
+      expiresIn: '5m',
     });
   }
 }
