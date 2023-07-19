@@ -14,8 +14,9 @@ export class TokenController {
   ) {}
 
   @Post('login')
-  async login(@Body() user: User): Promise<IUserToken> {
-    const userToken = await this.loginUseCase.execute(user);
+  async login(@Body() loginData: { email: string; password: string }): Promise<IUserToken> {
+    const { email, password } = loginData;
+    const userToken = await this.loginUseCase.execute(email, password);
     return userToken;
   }
 

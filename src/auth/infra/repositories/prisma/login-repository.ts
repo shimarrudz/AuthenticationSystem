@@ -1,4 +1,4 @@
-import { PrismaClient, RefreshToken } from "@prisma/client";
+import { PrismaClient, RefreshToken, User } from "@prisma/client";
 
 export class LoginRepository {
   private prisma: PrismaClient;
@@ -27,7 +27,11 @@ export class LoginRepository {
     return refreshToken;
   }
   
-  async revokeRefreshToken(token: string): Promise<void> {
-    await this.prisma.refreshToken.delete({ where: { token: token } });
+  async findUserByEmail(email: string): Promise<User | null> {
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+    });
+
+    return user;
   }
 }

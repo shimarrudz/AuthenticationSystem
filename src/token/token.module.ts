@@ -4,7 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { Login, Refresh } from './use-cases';
 import { TokenController } from '@/shared/infra/http';
 import { LoginRepository } from '@/auth/infra/repositories/prisma';
-import { RefreshTokenRepository, RevokedTokenRepository } from './infra/repositories/prisma';
+import { RefreshTokenRepository } from './infra/repositories/prisma';
 
 
 @Module({
@@ -19,10 +19,7 @@ import { RefreshTokenRepository, RevokedTokenRepository } from './infra/reposito
     Login,
     RefreshTokenRepository,
     Refresh,
-    RevokedTokenRepository,
     LoginRepository
   ],
-  exports: [RevokedTokenRepository]
-  
 })
 export class TokenModule {}
