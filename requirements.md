@@ -9,21 +9,22 @@
 - [X] The system should allow authenticated users to stay logged in without the need to log out.
 - [X] Protect All Routes.
 - [ ] Block refreshToken access instead of accessToken
-- [ ] Access token can be valid just for one user
+- [X] Access token can be valid just for one user
 - [X] Apply password validator and e-mail example@gmail.com.
 - [X] Review crypto or bcrypt
 - [ ] Apply Dependencie Inversion.
 - [X] Change everything to english.
-- [ ] Apply tests unit and e2e.
 - [X] Refactor structure code
 - [X] Import Path Maping.
+- [ ] Apply tests in memory, unit and e2e.
+- [ ] Fix register request, pass more than 1 property
 - [ ] Make refresh token exclusive
 - [ ] Refactor code.
-- [ ] Config log
 
 **Diferentials**
 - [ ] The system should support two-factor authentication via SMS or email for user login.
 - [ ] The system should allow users to update their password.
+- [ ] Config logger
 
 **Functional Requirements:**
 - [X] The system should allow users to register by providing their name, email, and a password.
@@ -45,10 +46,9 @@
 - [X] The system should protect specific routes, such as allowing access only to authenticated users.
 - [X] Tokens should expire every 5 minutes.
 - [X] The refresh token should be used to renew the authentication token when it expires.
-- [ ] The system should verify the validity of tokens and ensure data security.
+- [X] The system should verify the validity of tokens and ensure data security.
 - [X] The login route should generate an authentication token.
-- [ ] Error treatment status code
-- [ ] Config logger
+- [X] Error treatment status code
 
 **Non-Functional Requirements:**
 

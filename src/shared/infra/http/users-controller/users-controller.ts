@@ -21,13 +21,8 @@ export class UsersController {
       password_hash: '',
       createdAt: new Date(),
     };
-
-    try {
-      await this.registerUserUseCase.execute(user);
-      return { message: 'User created successfully' };
-    } catch (error) {
-      throw error;
-    }
+    await this.registerUserUseCase.execute(user);
+    return { message: 'User created successfully' };
   }
 
 

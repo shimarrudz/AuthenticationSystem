@@ -1,24 +1,34 @@
-import { Injectable } from "@nestjs/common";
-import * as bcrypt from "bcrypt"
+import { Injectable, ConflictException, InternalServerErrorException } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 
-import { UserRepository } from "@/users/infra/repositories";
-import { UserDto } from "../../dto";
+import { UserRepository } from '@/users/infra/repositories';
+import { UserDto } from '../../dto';
+import { HttpExceptionConstants } from '@/shared/constants';
 
 @Injectable()
 export class RegisterUserUseCase {
-    constructor(private readonly userRepository: UserRepository){}
-    async execute(data: UserDto): Promise<void> {
-        const { name, email, password } = data;
+  constructor(private readonly userRepository: UserRepository) {}
 
-        const password_hash = await bcrypt.hash(password, 10);
-    
-        await this.userRepository.create({
-            name,
-            email,
-            password,
-            password_hash,
-            createdAt: new Date(),
-        });
-        
+  async execute(data: UserDto): Promise<void> {
+    const { name, email, password } = data;
+
+    const userExists = await this.userRepository.findByEmail(email);
+    if (userExists) {
+      throw new ConflictException(HttpExceptionConstants.USER_ALREADY_EXISTS.message);
     }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    try {
+      await this.userRepository.create({
+        name,
+        email,
+        password,
+        password_hash: passwordHash,
+        createdAt: new Date(),
+      });
+    } catch (error) {
+      throw new InternalServerErrorException(HttpExceptionConstants.FAILED_TO_CREATE_USER.message);
+    }
+  }
 }

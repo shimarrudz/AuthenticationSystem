@@ -1,10 +1,11 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as jwt from 'jsonwebtoken';
 
 import { RefreshTokenRepository } from '@/token/infra/repositories/prisma';
 import { JwtPayloadDto, UserFromJwtDto } from '@/auth/domain/dto';
 import { RefreshPayloadTokenDto } from '../../dto';
+import { HttpExceptionConstants } from '@/shared/constants';
 
 @Injectable()
 export class Refresh {
@@ -25,20 +26,25 @@ export class Refresh {
 
   private async validateRefreshToken(refreshToken: string): Promise<UserFromJwtDto> {
     const token = await this.refreshTokenRepository.findRefreshToken(refreshToken);
-    if(!token) {
-      throw new Error('Token not found')
-    }
-    const decodedToken: any = jwt.verify(refreshToken, process.env.JWT_SECRET);
-
-    console.log('DECODED TOKEN:', decodedToken);
-
-    const user = await this.refreshTokenRepository.findUserById(decodedToken.sub);
-
-    if (!user) {
-      throw new UnauthorizedException('Refresh token inválido!');
+    if (!token) {
+      throw new NotFoundException(HttpExceptionConstants.TOKEN_NOT_FOUND.message);
     }
 
-    return user;
+    try {
+      const decodedToken: any = jwt.verify(refreshToken, process.env.JWT_SECRET);
+
+      console.log('DECODED TOKEN:', decodedToken);
+
+      const user = await this.refreshTokenRepository.findUserById(decodedToken.sub);
+
+      if (!user) {
+        throw new UnauthorizedException(HttpExceptionConstants.INVALID_REFRESH_TOKEN.message);
+      }
+
+      return user;
+    } catch (error) {
+      throw new UnauthorizedException(HttpExceptionConstants.INVALID_REFRESH_TOKEN.message);
+    }
   }
 
   private generateAccessToken(user: UserFromJwtDto): string {
