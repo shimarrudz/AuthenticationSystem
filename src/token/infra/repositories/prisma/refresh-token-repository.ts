@@ -1,7 +1,9 @@
+import { IUserFromJwt } from "@/auth/interfaces";
+
+import { IRefreshTokenRepository } from "@/token/interfaces";
 import { PrismaClient, RefreshToken } from "@prisma/client";
 
-import { IRefreshTokenRepository } from "src/token/interfaces";
-import { IUserFromJwt } from "src/auth/interfaces";
+
 
 export class RefreshTokenRepository implements IRefreshTokenRepository {
   private prisma: PrismaClient;

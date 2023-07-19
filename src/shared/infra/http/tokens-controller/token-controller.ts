@@ -1,9 +1,10 @@
 import { User } from '@prisma/client';
 import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 
-import { Login, Refresh } from 'src/token/use-cases';
-import { IUserToken, IRefreshPayloadToken } from 'src/token/interfaces';
-import { JwtAuthGuard } from 'src/auth/guards';
+import { JwtAuthGuard } from '@/auth/guards';
+import { Login, Refresh } from '@/token/use-cases';
+import { IUserToken, IRefreshPayloadToken } from '@/token/interfaces';
+
 
 @Controller('auth')
 export class TokenController {

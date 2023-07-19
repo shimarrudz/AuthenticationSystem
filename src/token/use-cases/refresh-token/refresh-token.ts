@@ -2,11 +2,9 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as jwt from 'jsonwebtoken';
 
-import { RefreshTokenRepository } from 'src/token/infra/repositories/prisma';
-import { IUserFromJwt } from '../../../auth/interfaces';
-import { IUserToken } from 'src/token/interfaces';
-import { IJwtPayload } from '../../../auth/interfaces';
-import { IRefreshPayloadToken } from 'src/token/interfaces/refresh-payload-token';
+import { RefreshTokenRepository } from '@/token/infra/repositories/prisma';
+import { IUserFromJwt, IJwtPayload } from '@/auth/interfaces';
+import { IUserToken } from '@/token/interfaces';
 
 
 @Injectable()
@@ -16,13 +14,14 @@ export class Refresh {
     private refreshTokenRepository: RefreshTokenRepository,
   ) {}
 
-  async execute(refreshToken: string): Promise<IRefreshPayloadToken> {
+  async execute(refreshToken: string): Promise<IUserToken> {
     const user = await this.validateRefreshToken(refreshToken);
 
     const accessToken = this.generateAccessToken(user);
 
     return {
       accessToken,
+      refreshToken
     };
   }
 
@@ -51,7 +50,7 @@ export class Refresh {
     };
 
     return this.jwtService.sign(payload, {
-      expiresIn: '5m',
+      expiresIn: '10m',
     });
   }
 }

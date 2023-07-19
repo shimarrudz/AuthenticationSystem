@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 
-import { TokenController } from 'src/shared/infra/http/tokens-controller/token-controller';
-import { Login } from '../auth/use-case/login/login';
-import { RefreshTokenRepository } from './infra/repositories/prisma';
-import { Logout } from './use-cases/logout/logout';
-import { Refresh } from './use-cases/refresh-token/refresh-token';
-import { RevokedTokenRepository } from './infra/repositories/prisma';
-import { LoginRepository } from 'src/auth/infra/repositories/prisma/login-repository';
+import { Login, Refresh } from './use-cases';
+import { TokenController } from '@/shared/infra/http';
+import { LoginRepository } from '@/auth/infra/repositories/prisma';
+import { RefreshTokenRepository, RevokedTokenRepository } from './infra/repositories/prisma';
+
 
 @Module({
   imports: [
@@ -20,7 +18,6 @@ import { LoginRepository } from 'src/auth/infra/repositories/prisma/login-reposi
   providers: [
     Login,
     RefreshTokenRepository,
-    Logout,
     Refresh,
     RevokedTokenRepository,
     LoginRepository

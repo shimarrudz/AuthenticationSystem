@@ -2,9 +2,9 @@ import { Injectable, } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 
-import { IJwtPayload } from 'src/auth/interfaces';
-import { IUserToken } from 'src/token/interfaces';
-import { LoginRepository } from 'src/auth/infra/repositories/prisma/login-repository';
+import { IJwtPayload } from '@/auth/interfaces';
+import { IUserToken } from '@/token/interfaces';
+import { LoginRepository } from '@/auth/infra/repositories/prisma/login-repository';
 
 @Injectable()
 export class Login {

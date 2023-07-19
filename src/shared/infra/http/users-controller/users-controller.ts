@@ -1,12 +1,9 @@
 import { Controller, Post, Get, Delete, Param, Body, UseGuards } from '@nestjs/common';
 
-import { GetUserUseCase } from 'src/users/use-cases/get-user/get-user';
-import { User } from 'src/users/interfaces/user';
-import { RegisterUserDto } from 'src/users/dto';
-import { RegisterUserUseCase } from "src/users/use-cases/register-user/register-user";
-import { IRegisterUser } from 'src/users/interfaces';
-import { SoftDeleteUserUseCase } from 'src/users/use-cases/soft-delete/soft-delete';
-import { JwtAuthGuard } from 'src/auth/guards';
+import { JwtAuthGuard } from '@/auth/guards';
+import { RegisterUserDto } from '@/users/dto';
+import { IRegisterUser, User } from '@/users/interfaces';
+import { RegisterUserUseCase, GetUserUseCase, SoftDeleteUserUseCase } from '@/users/use-cases';
 
 @Controller('auth')
 export class UsersController {

@@ -1,8 +1,7 @@
-import { Injectable } from "@nestjs/common";
+import { UserRepository } from "@/users/infra/repositories";
 
-import { UserRepository } from "src/users/infra/repositories/prisma/prisma-user-repository";
-import { IUserRepository } from "src/users/interfaces/user-repository.interface";
-import { User } from "src/users/interfaces/user";
+import { User } from "@prisma/client";
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class GetUserUseCase {

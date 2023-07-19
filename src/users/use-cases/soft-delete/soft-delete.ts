@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { UserRepository } from "src/users/infra/repositories/prisma/prisma-user-repository";
+
+import { UserRepository } from "@/users/infra/repositories";
 
 @Injectable()
 export class SoftDeleteUserUseCase {

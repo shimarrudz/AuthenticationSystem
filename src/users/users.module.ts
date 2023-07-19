@@ -1,15 +1,12 @@
 import { Module } from "@nestjs/common";
 
-import { RegisterUserUseCase } from "./use-cases/register-user/register-user";
-import { UsersController } from "src/shared/infra/http/users-controller/users-controller";
-import { UserRepository } from "./infra/repositories/prisma/prisma-user-repository";
-import { GetUserUseCase } from "./use-cases/get-user/get-user";
-import { SoftDeleteUserUseCase } from "./use-cases/soft-delete/soft-delete";
-import { RevokedTokenRepository } from "src/token/infra/repositories/prisma";
-import { IRegisterUser } from "./interfaces";
+import { UsersController } from "@/shared/infra/http";
+import { UserRepository } from "./infra/repositories";
+import { RegisterUserUseCase, GetUserUseCase, SoftDeleteUserUseCase } from "./use-cases";
+
 
 @Module({
-  providers: [RegisterUserUseCase, UserRepository, GetUserUseCase, SoftDeleteUserUseCase, RevokedTokenRepository],
+  providers: [RegisterUserUseCase, UserRepository, GetUserUseCase, SoftDeleteUserUseCase],
   controllers: [UsersController],
 })
 export class UsersModule {}

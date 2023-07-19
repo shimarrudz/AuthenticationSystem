@@ -1,18 +1,23 @@
-import { Module } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
-import { UsersModule } from "src/users/users.module";
+import { Module } from "@nestjs/common";
 
-import { JwtStrategy } from "./strategies/jwt-strategy";
+import { JwtStrategy } from "./strategies";
+import { UsersModule } from "@/users/users.module";
+import { UsersController, TokenController } from "@/shared/infra/http";
+import { UserRepository } from "@/users/infra/repositories";
 import { JwtAuthGuard } from "./guards";
-import { TokenController } from "src/shared/infra/http";
-import { RefreshTokenRepository } from "src/token/infra/repositories/prisma";
-import { Login, Logout, Refresh } from "src/token/use-cases";
-import { UsersController } from "src/shared/infra/http";
-import { RegisterUserUseCase } from "src/users/use-cases";
-import { UserRepository } from "src/users/infra/repositories/prisma/prisma-user-repository";
-import { GetUserUseCase } from "src/users/use-cases/get-user/get-user";
-import { SoftDeleteUserUseCase } from "src/users/use-cases/soft-delete/soft-delete";
-import { LoginRepository } from "./infra/repositories/prisma/login-repository";
+import { LoginRepository } from "./infra/repositories/prisma";
+import { RefreshTokenRepository } from "@/token/infra/repositories/prisma";
+import { Login } from "./use-case";
+import { Refresh } from "@/token/use-cases";
+import { RegisterUserUseCase, GetUserUseCase, SoftDeleteUserUseCase } from "@/users/use-cases";
+
+
+
+
+
+
+
 
 @Module({
   imports: [
@@ -31,7 +36,6 @@ import { LoginRepository } from "./infra/repositories/prisma/login-repository";
     GetUserUseCase,
     SoftDeleteUserUseCase,
     Login,
-    Logout,
     JwtAuthGuard,
     JwtStrategy,
     LoginRepository,
