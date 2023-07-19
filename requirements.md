@@ -7,12 +7,11 @@
 - [X] The system should allow users to view their profile, including personal information.
 - [X] The system should allow users to soft delete their account.
 - [X] The system should allow authenticated users to stay logged in without the need to log out.
-- [ ] Protect All Routes.
-- [ ] The system should allow users to update their password.
+- [X] Protect All Routes.
 - [ ] Block refreshToken access instead of accessToken
 - [ ] Access token can be valid just for one user
-- [ ] Apply password validator and e-mail example@gmail.com.
-- [ ] Review crypto or bcrypt
+- [X] Apply password validator and e-mail example@gmail.com.
+- [X] Review crypto or bcrypt
 - [ ] Apply Dependencie Inversion.
 - [ ] Change everything to english.
 - [ ] Apply tests unit and e2e.
@@ -21,6 +20,7 @@
 - [ ] Make refresh token exclusive
 - [ ] Refactor code.
 - [ ] The system should support two-factor authentication via SMS or email for user login.
+- [ ] The system should allow users to update their password.
 
 **Functional Requirements:**
 - [X] The system should allow users to register by providing their name, email, and a password.

@@ -1,4 +1,3 @@
-import { User } from '@prisma/client';
 import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@/auth/guards';
