@@ -1,10 +1,14 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { User } from '@prisma/client';
+import * as jwt from 'jsonwebtoken';
+
 
 import { Login } from 'src/token/use-cases';
 import { IUserToken } from 'src/token/interfaces';
 import { Logout } from 'src/token/use-cases';
 import { Refresh } from 'src/token/use-cases';
+import { IRefreshPayloadToken } from 'src/token/interfaces/refresh-payload-token';
+import { JwtAuthGuard } from 'src/auth/guards';
 
 @Controller('auth')
 export class TokenController {
@@ -20,15 +24,9 @@ export class TokenController {
     return userToken;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('refresh')
-  async refresh(@Body('refreshToken') refreshToken: string): Promise<IUserToken> {
-    console.log('refreshToken:', refreshToken);
+  async refresh(@Body('refreshToken') refreshToken: string): Promise<IRefreshPayloadToken> {
     return this.refreshTokenUseCase.execute(refreshToken);
-  }
-  
-
-  @Post('logout')
-  async logout(@Body('refreshToken') refreshToken : string): Promise<void> {
-    await this.logoutUseCase.execute(refreshToken);
   }
 }

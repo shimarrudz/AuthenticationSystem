@@ -1,5 +1,4 @@
 import { IsDate, IsNotEmpty, IsString } from "class-validator";
-import { User } from '@prisma/client';
 
 export class RefreshTokenDto {
   @IsNotEmpty()

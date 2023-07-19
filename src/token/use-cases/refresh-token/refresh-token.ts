@@ -6,6 +6,7 @@ import { RefreshTokenRepository } from 'src/token/infra/repositories/prisma';
 import { IUserFromJwt } from '../../../auth/interfaces';
 import { IUserToken } from 'src/token/interfaces';
 import { IJwtPayload } from '../../../auth/interfaces';
+import { IRefreshPayloadToken } from 'src/token/interfaces/refresh-payload-token';
 
 
 @Injectable()
@@ -15,14 +16,13 @@ export class Refresh {
     private refreshTokenRepository: RefreshTokenRepository,
   ) {}
 
-  async execute(refreshToken: string): Promise<IUserToken> {
+  async execute(refreshToken: string): Promise<IRefreshPayloadToken> {
     const user = await this.validateRefreshToken(refreshToken);
 
     const accessToken = this.generateAccessToken(user);
 
     return {
       accessToken,
-      refreshToken
     };
   }
 
@@ -51,7 +51,7 @@ export class Refresh {
     };
 
     return this.jwtService.sign(payload, {
-      expiresIn: '10m',
+      expiresIn: '5m',
     });
   }
 }

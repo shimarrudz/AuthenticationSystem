@@ -1,7 +1,5 @@
 import { PrismaClient, RefreshToken } from "@prisma/client";
-import * as crypto from 'node:crypto'
 
-import { RefreshTokenDto } from "src/token/dto/refresh-token-dto";
 import { IRefreshTokenRepository } from "src/token/interfaces";
 import { IUserFromJwt } from "src/auth/interfaces";
 
@@ -26,26 +24,11 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
     return user ? { id: user.id, email: user.email } : null;
   }
 
-  async createRefreshToken({
-    user_id,
-    expires_at,
-  }: RefreshTokenDto): Promise<RefreshToken> {
-    const refreshToken = this.prisma.refreshToken.create({
-      data:{
-        token: crypto.randomBytes(32).toString('hex'),
-        user_id,
-        expires_at: new Date(Date.now() + expires_at),
-      },
-    });
-
-    return refreshToken;
-  }
-
-  async findRefreshToken(token: string): Promise<RefreshToken> {
+  async findRefreshToken(token: string): Promise<RefreshToken | null> {
     const refreshToken = await this.prisma.refreshToken.findUnique({
       where: { token: token },
     });
-
+  
     return refreshToken; 
   }
   

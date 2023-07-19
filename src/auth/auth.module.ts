@@ -12,6 +12,7 @@ import { RegisterUserUseCase } from "src/users/use-cases";
 import { UserRepository } from "src/users/infra/repositories/prisma/prisma-user-repository";
 import { GetUserUseCase } from "src/users/use-cases/get-user/get-user";
 import { SoftDeleteUserUseCase } from "src/users/use-cases/soft-delete/soft-delete";
+import { LoginRepository } from "./infra/repositories/prisma/login-repository";
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { SoftDeleteUserUseCase } from "src/users/use-cases/soft-delete/soft-dele
     Logout,
     JwtAuthGuard,
     JwtStrategy,
+    LoginRepository,
   ],
 })
 export class AuthModule {}

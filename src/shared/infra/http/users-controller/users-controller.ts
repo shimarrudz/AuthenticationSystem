@@ -41,6 +41,7 @@ export class UsersController {
     return this.getUserUseCase.execute(user_id)
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deleteUser(@Param('id') user_id: string): Promise<{ message: string }> {
     await this.softDeleteUseCase.execute(user_id);

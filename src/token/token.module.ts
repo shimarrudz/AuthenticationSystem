@@ -7,6 +7,7 @@ import { RefreshTokenRepository } from './infra/repositories/prisma';
 import { Logout } from './use-cases/logout/logout';
 import { Refresh } from './use-cases/refresh-token/refresh-token';
 import { RevokedTokenRepository } from './infra/repositories/prisma';
+import { LoginRepository } from 'src/auth/infra/repositories/prisma/login-repository';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { RevokedTokenRepository } from './infra/repositories/prisma';
     Logout,
     Refresh,
     RevokedTokenRepository,
+    LoginRepository
   ],
   exports: [RevokedTokenRepository]
   
