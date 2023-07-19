@@ -19,6 +19,7 @@
 - [X] Import Path Maping.
 - [ ] Make refresh token exclusive
 - [ ] Refactor code.
+- [ ] Config log
 
 **Diferentials**
 - [ ] The system should support two-factor authentication via SMS or email for user login.
