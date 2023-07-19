@@ -6,6 +6,7 @@ import { UserRepository } from "./infra/repositories/prisma/prisma-user-reposito
 import { GetUserUseCase } from "./use-cases/get-user/get-user";
 import { SoftDeleteUserUseCase } from "./use-cases/soft-delete/soft-delete";
 import { RevokedTokenRepository } from "src/token/infra/repositories/prisma";
+import { IRegisterUser } from "./interfaces";
 
 @Module({
   providers: [RegisterUserUseCase, UserRepository, GetUserUseCase, SoftDeleteUserUseCase, RevokedTokenRepository],

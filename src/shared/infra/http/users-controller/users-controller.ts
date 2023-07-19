@@ -2,7 +2,7 @@ import { Controller, Post, Get, Delete, Param, Body, UseGuards } from '@nestjs/c
 
 import { GetUserUseCase } from 'src/users/use-cases/get-user/get-user';
 import { User } from 'src/users/interfaces/user';
-import { CreateUserDto } from "src/users/dto/create-user.dto";
+import { RegisterUserDto } from 'src/users/dto';
 import { RegisterUserUseCase } from "src/users/use-cases/register-user/register-user";
 import { IRegisterUser } from 'src/users/interfaces';
 import { SoftDeleteUserUseCase } from 'src/users/use-cases/soft-delete/soft-delete';
@@ -17,7 +17,7 @@ export class UsersController {
     ) {}
 
   @Post('signup')
-  async create(@Body() createUserDto: CreateUserDto): Promise<any> {
+  async create(@Body() createUserDto: RegisterUserDto): Promise<any> {
     const user: IRegisterUser = {
       name: createUserDto.name,
       email: createUserDto.email,

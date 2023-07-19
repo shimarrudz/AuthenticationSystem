@@ -1,8 +1,6 @@
-import { RefreshToken } from "@prisma/client";
+import { Prisma, RefreshToken } from "@prisma/client";
 
-export abstract class IRefreshTokenRepository {
-  
-  abstract findRefreshToken(token: string): Promise<RefreshToken>;
-  
-  abstract revokeRefreshToken(token: string): Promise<void>;
+export interface IRefreshTokenRepository {
+  findRefreshToken(token: string): Promise<RefreshToken>;
+  revokeRefreshToken(token: string): Promise<void>;
 }

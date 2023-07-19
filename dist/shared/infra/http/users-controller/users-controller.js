@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const get_user_1 = require("../../../../users/use-cases/get-user/get-user");
-const create_user_dto_1 = require("../../../../users/dto/create-user.dto");
+const dto_1 = require("../../../../users/dto");
 const register_user_1 = require("../../../../users/use-cases/register-user/register-user");
 const soft_delete_1 = require("../../../../users/use-cases/soft-delete/soft-delete");
 const guards_1 = require("../../../../auth/guards");
@@ -53,7 +53,7 @@ __decorate([
     (0, common_1.Post)('signup'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
+    __metadata("design:paramtypes", [dto_1.RegisterUserDto]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "create", null);
 __decorate([

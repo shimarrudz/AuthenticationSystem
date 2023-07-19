@@ -18,6 +18,7 @@
 - [ ] Apply tests unit and e2e.
 - [ ] Refactor structure code
 - [ ] Import Path.
+- [ ] Make refresh token exclusive
 - [ ] Refactor code.
 - [ ] The system should support two-factor authentication via SMS or email for user login.
 
@@ -42,13 +43,13 @@
 - [X] The existence of a user's email should be validated.
 - [ ] During email registration, the email format "example@.com" should be validated.
 - [###] Authenticated users should only have access to and be able to update their own profile.
-- [ ] Two-factor authentication should be available via SMS or email.
-- [ ] The system should protect specific routes, such as allowing access only to authenticated users.
-- [ ] Tokens should expire every 5 minutes.
-- [ ] After expiration, a new "refresh token" should be generated.
-- [ ] The refresh token should be used to renew the authentication token when it expires.
+- [X] The system should protect specific routes, such as allowing access only to authenticated users.
+- [X] Tokens should expire every 5 minutes.
+- [X] The refresh token should be used to renew the authentication token when it expires.
 - [ ] The system should verify the validity of tokens and ensure data security.
-- [ ] The login route should generate an authentication token.
+- [X] The login route should generate an authentication token.
+- [ ] Error treatment status code
+- [ ] Config logger
 
 **Non-Functional Requirements:**
 
@@ -57,7 +58,7 @@
 - [X] The system should be secure, protecting users' personal information.
 - [ ] The system should be testable, facilitating the writing and execution of automated tests to ensure code quality.
 - [ ] The system should have clear and comprehensive documentation using Swagger, including installation instructions, configuration details, and API usage guidelines.
-- [ ] The system should integrate with third-party services for email authentication, file storage, etc., when necessary.
-- [ ] The system should persist user data using PostgreSQL.
+- [X] The system should integrate with third-party services for email authentication, file storage, etc., when necessary.
+- [X] The system should persist user data using PostgreSQL.
 
 Feel free to add more details or adjust the requirements according to your specific needs.
