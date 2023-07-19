@@ -1,5 +1,5 @@
 import { UsersController } from "./users-controller";
-import { RegisterUserUseCase } from "src/users/use-cases/register-user/register-user";
+import { RegisterUserUseCase } from "@/users/domain/use-cases/register-user/register-user";
 import { CreateUserDto } from "src/users/dto/create-user.dto";
 
 describe("Users Controller", () => {

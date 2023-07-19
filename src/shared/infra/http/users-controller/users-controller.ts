@@ -1,11 +1,10 @@
 import { Controller, Post, Get, Delete, Param, Body, UseGuards } from '@nestjs/common';
 
-import { JwtAuthGuard } from '@/auth/guards';
-import { RegisterUserDto } from '@/users/dto';
-import { IRegisterUser, User } from '@/users/interfaces';
-import { RegisterUserUseCase, GetUserUseCase, SoftDeleteUserUseCase } from '@/users/use-cases';
+import { JwtAuthGuard } from '@/auth/domain/guards';
+import { RegisterUserDto, UserDto, UserDeletedDto } from '@/users/domain/dto';
+import { RegisterUserUseCase, GetUserUseCase, SoftDeleteUserUseCase } from '@/users/domain/use-cases';
 
-@Controller('auth')
+@Controller('users')
 export class UsersController {
   constructor(
     private readonly registerUserUseCase: RegisterUserUseCase,
@@ -15,7 +14,7 @@ export class UsersController {
 
   @Post('signup')
   async create(@Body() createUserDto: RegisterUserDto): Promise<any> {
-    const user: IRegisterUser = {
+    const user: UserDto = {
       name: createUserDto.name,
       email: createUserDto.email,
       password: createUserDto.password,
@@ -34,7 +33,7 @@ export class UsersController {
 
   @Get(':id')
   @UseGuards(JwtAuthGuard)
-  async getUser(@Param('id') user_id: string): Promise<User> {
+  async getUser(@Param('id') user_id: string): Promise<UserDeletedDto> {
     return this.getUserUseCase.execute(user_id)
   }
 

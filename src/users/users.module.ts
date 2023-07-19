@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 
 import { UsersController } from "@/shared/infra/http";
 import { UserRepository } from "./infra/repositories";
-import { RegisterUserUseCase, GetUserUseCase, SoftDeleteUserUseCase } from "./use-cases";
+import { RegisterUserUseCase, GetUserUseCase, SoftDeleteUserUseCase } from "./domain/use-cases";
 
 
 @Module({

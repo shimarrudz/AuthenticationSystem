@@ -1,7 +1,8 @@
 import * as bcrypt from "bcrypt";
 import { PrismaClient, User } from "@prisma/client";
 
-import { IRegisterUser, IUserRepository } from "@/users/interfaces";
+import { IUserRepository } from "@/users/domain/interfaces";
+import { UserDto } from "@/users/domain/dto";
 
 export class UserRepository implements IUserRepository {
   private prisma: PrismaClient;
@@ -10,7 +11,7 @@ export class UserRepository implements IUserRepository {
     this.prisma = new PrismaClient();
   }
 
-  async create(data: IRegisterUser) {
+  async create(data: UserDto) {
     const passwordHash = await bcrypt.hash(data.password, 10);
     const user = await this.prisma.user.create({
       data: {
@@ -38,7 +39,6 @@ export class UserRepository implements IUserRepository {
     });
     return user;
   }
-
 
   async softDeleteUser(id: string): Promise<void> {
     await this.prisma.user.update({

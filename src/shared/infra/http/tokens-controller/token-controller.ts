@@ -1,9 +1,9 @@
 import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 
-import { JwtAuthGuard } from '@/auth/guards';
-import { Login, Refresh } from '@/token/use-cases';
-import { IUserToken, IRefreshPayloadToken } from '@/token/interfaces';
-
+import { JwtAuthGuard } from '@/auth/domain/guards';
+import { Login } from '@/auth/domain/use-case';
+import { Refresh } from '@/token/domain/use-cases';
+import { UserTokenDto, RefreshPayloadTokenDto } from '@/token/domain/dto';
 
 @Controller('auth')
 export class TokenController {
@@ -13,7 +13,7 @@ export class TokenController {
   ) {}
 
   @Post('login')
-  async login(@Body() loginData: { email: string; password: string }): Promise<IUserToken> {
+  async login(@Body() loginData: { email: string; password: string }): Promise<UserTokenDto> {
     const { email, password } = loginData;
     const userToken = await this.loginUseCase.execute(email, password);
     return userToken;
@@ -21,7 +21,7 @@ export class TokenController {
 
   @UseGuards(JwtAuthGuard)
   @Post('refresh')
-  async refresh(@Body('refreshToken') refreshToken: string): Promise<IRefreshPayloadToken> {
+  async refresh(@Body('refreshToken') refreshToken: string): Promise<RefreshPayloadTokenDto> {
     return this.refreshTokenUseCase.execute(refreshToken);
   }
 }

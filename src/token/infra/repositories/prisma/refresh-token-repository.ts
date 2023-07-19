@@ -1,6 +1,6 @@
-import { IUserFromJwt } from "@/auth/interfaces";
+import { UserFromJwtDto } from "@/auth/domain/dto";
 
-import { IRefreshTokenRepository } from "@/token/interfaces";
+import { IRefreshTokenRepository } from "@/token/domain/interfaces";
 import { PrismaClient, RefreshToken } from "@prisma/client";
 
 
@@ -12,7 +12,7 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
     this.prisma = new PrismaClient();
   }
 
-  async findUserById(userId: string): Promise<IUserFromJwt | null> {
+  async findUserById(userId: string): Promise<UserFromJwtDto | null> {
     const user = await this.prisma.user.findUnique({
       where: {
         id: userId,

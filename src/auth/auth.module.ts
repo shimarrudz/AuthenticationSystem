@@ -1,16 +1,16 @@
 import { JwtModule } from "@nestjs/jwt";
 import { Module } from "@nestjs/common";
 
-import { JwtStrategy } from "./strategies";
+import { JwtStrategy } from "./domain/strategies";
 import { UsersModule } from "@/users/users.module";
 import { UsersController, TokenController } from "@/shared/infra/http";
 import { UserRepository } from "@/users/infra/repositories";
-import { JwtAuthGuard } from "./guards";
+import { JwtAuthGuard } from "./domain/guards";
 import { LoginRepository } from "./infra/repositories/prisma";
 import { RefreshTokenRepository } from "@/token/infra/repositories/prisma";
-import { Login } from "./use-case";
-import { Refresh } from "@/token/use-cases";
-import { RegisterUserUseCase, GetUserUseCase, SoftDeleteUserUseCase } from "@/users/use-cases";
+import { Login } from "./domain/use-case";
+import { Refresh } from "@/token/domain/use-cases";
+import { RegisterUserUseCase, GetUserUseCase, SoftDeleteUserUseCase } from "@/users/domain/use-cases";
 
 @Module({
   imports: [
