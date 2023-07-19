@@ -6,6 +6,7 @@ import * as bcrypt from 'bcrypt'
 import { JwtPayloadDto } from '../../dto';
 import { UserTokenDto, RefreshPayloadDto } from '@/token/domain/dto';
 import { LoginRepository } from '@/auth/infra/repositories/prisma/login-repository';
+import { HttpExceptionConstants } from '@/shared/constants';
 
 @Injectable()
 export class Login {
@@ -18,13 +19,13 @@ export class Login {
     const user = await this.findUserByEmail(email);
 
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException(HttpExceptionConstants.INVALID_CREDENTIALS.message);
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password_hash);
 
     if (!passwordMatch) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException(HttpExceptionConstants.INVALID_CREDENTIALS.message);
     }
 
     const accessToken = this.generateAccessToken(user.id, user.email);
