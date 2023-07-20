@@ -1,7 +1,6 @@
 import { UserFromJwtDto } from "@/auth/domain/dto";
 import { IRefreshTokenRepository } from "../../interfaces";
 import { PrismaClient, RefreshToken } from "@prisma/client";
-import { GetResult } from "@prisma/client/runtime/library";
 
 export class InMemoryRefreshToken implements IRefreshTokenRepository {
     private prisma: PrismaClient;
