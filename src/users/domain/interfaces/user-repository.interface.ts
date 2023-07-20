@@ -1,10 +1,10 @@
 import { User, PrismaClient } from '@prisma/client';
 import { UserDto } from '@/users/domain/dto';
 
-export interface IUserRepository {
+export abstract class IUserRepository {
   prisma: PrismaClient; // Adicione a propriedade prisma aqui
-  create(data: UserDto): Promise<User | null>;
-  findByEmail(email: string): Promise<User | null>;
-  getUserById(id: string): Promise<User | null>;
-  softDeleteUser(id: string): Promise<void>;
+  abstract create(data: UserDto): Promise<User | null>;
+  abstract findByEmail(email: string): Promise<User | null>;
+  abstract getUserById(id: string): Promise<User | null>;
+  abstract softDeleteUser(id: string): Promise<void>;
 }

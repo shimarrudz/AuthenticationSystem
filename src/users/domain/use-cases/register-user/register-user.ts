@@ -1,13 +1,13 @@
 import { Injectable, ConflictException, InternalServerErrorException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 
-import { UserRepository } from '@/users/infra/repositories';
 import { UserDto } from '../../dto';
 import { HttpExceptionConstants } from '@/shared/constants';
+import { IUserRepository } from '../../interfaces';
 
 @Injectable()
 export class RegisterUserUseCase {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(private readonly userRepository: IUserRepository) {}
 
   async execute(data: UserDto): Promise<void> {
     const { name, email, password } = data;

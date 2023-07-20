@@ -8,7 +8,6 @@
 - [X] The system should allow users to soft delete their account.
 - [X] The system should allow authenticated users to stay logged in without the need to log out.
 - [X] Protect All Routes.
-- [ ] Block refreshToken access instead of accessToken
 - [X] Access token can be valid just for one user
 - [X] Apply password validator and e-mail example@gmail.com.
 - [X] Review crypto or bcrypt
@@ -16,9 +15,11 @@
 - [X] Change everything to english.
 - [X] Refactor structure code
 - [X] Import Path Maping.
+- [ ] Block refreshToken access instead of accessToken
+- [ ] Fix routes, email validation, password, login more then 1 parameters
 - [ ] Apply tests in memory, unit and e2e.
-- [ ] Fix register request, pass more than 1 property
 - [ ] Make refresh token exclusive
+- [ ] Prettier on everything
 - [ ] Refactor code.
 
 **Diferentials**
@@ -41,7 +42,7 @@
 - [X] User passwords should be stored securely using encryption techniques.
 - [X] Passwords should follow alphanumeric patterns, with a minimum length of 8 characters and a maximum length of 32 characters.
 - [X] The existence of a user's email should be validated.
-- [ ] During email registration, the email format "example@.com" should be validated.
+- [X] During email registration, the email format "example@.com" should be validated.
 - [###] Authenticated users should only have access to and be able to update their own profile.
 - [X] The system should protect specific routes, such as allowing access only to authenticated users.
 - [X] Tokens should expire every 5 minutes.
@@ -55,8 +56,8 @@
 - [X] The system should be developed using the Nest.js framework and the TypeScript programming language.
 - [X] The system should follow the principles of RESTful architecture.
 - [X] The system should be secure, protecting users' personal information.
-- [ ] The system should be testable, facilitating the writing and execution of automated tests to ensure code quality.
-- [ ] The system should have clear and comprehensive documentation using Swagger, including installation instructions, configuration details, and API usage guidelines.
+- [X] The system should be testable, facilitating the writing and execution of automated tests to ensure code quality.
+- [X] The system should have clear and comprehensive documentation using Swagger, including installation instructions, configuration details, and API usage guidelines.
 - [X] The system should integrate with third-party services for email authentication, file storage, etc., when necessary.
 - [X] The system should persist user data using PostgreSQL.
 

@@ -17,7 +17,7 @@ export class InMemoryUserRepository implements IUserRepository {
     const passwordHash = await bcrypt.hash(password, 10);
 
     const newUser: User = {
-      id: Math.random().toString(), // You can generate a unique ID here
+      id: Math.random().toString(),
       name,
       email,
       password_hash: passwordHash,
