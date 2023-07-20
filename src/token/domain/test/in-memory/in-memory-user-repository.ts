@@ -26,13 +26,14 @@ export class InMemoryRefreshToken implements IRefreshTokenRepository {
     }
 
     async findRefreshToken(token: string): Promise<RefreshToken | null> {
-        const refreshToken = this.refreshTokens.find(
-            (refreshToken) => refreshToken.token === token 
-        );
-        
+        const refreshToken = await this.prisma.refreshToken.findUnique({
+          where: {
+            token: token,
+          },
+        });
+      
         return refreshToken || null;
-    }
-
+      }
     async saveRefreshToken(refreshToken: RefreshToken): Promise<void> {
         this.refreshTokens.push(refreshToken);
       }
