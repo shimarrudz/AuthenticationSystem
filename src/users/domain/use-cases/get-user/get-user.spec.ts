@@ -29,7 +29,7 @@ describe("Get User", () => {
       .mockResolvedValue(fakeUser);
   });
 
-  describe("Success Test", () => {
+  describe("Execute get user", () => {
     it("should be able to get an user by user_id", async () => {
       const result = await getUserUseCase.execute(user_id_here);
 
@@ -43,7 +43,7 @@ describe("Get User", () => {
     });
   });
 
-  describe("Fail Test", () => {
+  describe("Get user by id errors", () => {
     it("should throw HttpException when user is not found", async () => {
       const nonExistentUserId = "non_existent_user_id";
 

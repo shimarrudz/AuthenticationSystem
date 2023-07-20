@@ -32,5 +32,10 @@ export class InMemoryRefreshToken implements IRefreshTokenRepository {
         
         return refreshToken || null;
     }
+
+    async saveRefreshToken(refreshToken: RefreshToken): Promise<void> {
+        this.refreshTokens.push(refreshToken);
+      }
+    
     
 }
