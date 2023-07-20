@@ -11,7 +11,7 @@
 - [X] Access token can be valid just for one user
 - [X] Apply password validator and e-mail example@gmail.com.
 - [X] Review crypto or bcrypt
-- [ ] Apply Dependencie Inversion.
+- [X] Apply Dependencie Inversion.
 - [X] Change everything to english.
 - [X] Refactor structure code
 - [X] Import Path Maping.
