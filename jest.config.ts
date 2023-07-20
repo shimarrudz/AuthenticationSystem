@@ -7,7 +7,7 @@ const config: Config.InitialOptions = {
   "collectCoverage": true, 
   "coverageReporters": ["lcov", "text"],
   moduleNameMapper: {
-    '^src/(.*)$': '<rootDir>/src/$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
 };
 

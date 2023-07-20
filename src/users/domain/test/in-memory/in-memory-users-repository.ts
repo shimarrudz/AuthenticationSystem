@@ -1,24 +1,23 @@
-import * as bcrypt from 'bcrypt';
-import { v4 as uuidv4 } from 'uuid';
-
-import { IUserRepository } from '@/users/domain/interfaces';
-import { UserDto } from '@/users/domain/dto';
-import { User } from '@prisma/client';
+import * as bcrypt from "bcrypt";
+import { PrismaClient, User } from "@prisma/client";
+import { UserDto } from "@/users/domain/dto";
+import { IUserRepository } from "../../interfaces";
 
 export class InMemoryUserRepository implements IUserRepository {
-  private users: User[];
+  prisma: PrismaClient;
+  users: User[];
 
   constructor() {
+    this.prisma = new PrismaClient();
     this.users = [];
   }
 
   async create(data: UserDto): Promise<User> {
     const { name, email, password } = data;
-    const id = uuidv4();
     const passwordHash = await bcrypt.hash(password, 10);
 
     const newUser: User = {
-      id,
+      id: Math.random().toString(), // You can generate a unique ID here
       name,
       email,
       password_hash: passwordHash,

@@ -1,18 +1,19 @@
 import { ConflictException, InternalServerErrorException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
-
 import { InMemoryUserRepository } from '../../test/in-memory';
-import { RegisterUserUseCase } from '@/users/domain/use-cases';
+import { RegisterUserUseCase } from './register-user';
+import * as bcrypt from 'bcrypt'
+
 import { UserDto } from '@/users/domain/dto';
+import { IUserRepository } from '../../interfaces'; // Importe a interface IUserRepository
 
 describe('RegisterUserUseCase', () => {
   let registerUserUseCase: RegisterUserUseCase;
-  let userRepository: InMemoryUserRepository;
+  let userRepository: IUserRepository; // Utilize a interface IUserRepository aqui
 
-beforeEach(() => {
-  userRepository = new InMemoryUserRepository(); // Instancie o repositório in-memory nos testes
-  registerUserUseCase = new RegisterUserUseCase(userRepository);
-});
+  beforeEach(() => {
+    userRepository = new InMemoryUserRepository();
+    registerUserUseCase = new RegisterUserUseCase(userRepository);
+  });
 
   it('should create a new user', async () => {
     // Dados do usuário
@@ -20,49 +21,64 @@ beforeEach(() => {
       name: 'John Doe',
       email: 'john@example.com',
       password: 'mypassword',
+      password_hash: '', // Adicione o password_hash com um valor de exemplo vazio
+      createdAt: new Date(), // Adicione createdAt com um valor de data de exemplo
     };
-
+  
+    // Configuração do mock do userRepository.findByEmail para simular que o usuário não existe
+    userRepository.findByEmail = jest.fn().mockResolvedValue(null);
+  
+    // Configuração do mock do bcrypt.hash para retornar o hash da senha
+    bcrypt.hash = jest.fn().mockResolvedValue('hashedPassword');
+  
     // Chamada do caso de uso
     await expect(registerUserUseCase.execute(userData)).resolves.toBeUndefined();
-
+  
     // Verificações
-    const user = await userRepository.findByEmail(userData.email);
-    expect(user).toBeTruthy();
-    expect(user?.name).toBe(userData.name);
-    expect(user?.email).toBe(userData.email);
-
-    // Verifica se a senha foi corretamente hasheada
-    const passwordMatch = await bcrypt.compare(userData.password, user?.password_hash || '');
-    expect(passwordMatch).toBe(true);
+    expect(userRepository.findByEmail).toHaveBeenCalledWith(userData.email);
+    expect(bcrypt.hash).toHaveBeenCalledWith(userData.password, 10);
+    expect(userRepository.create).toHaveBeenCalledWith(expect.objectContaining(userData));
   });
 
   it('should throw ConflictException if user already exists', async () => {
-    // Dados do usuário
+    // Test case for user registration with existing email
     const userData: UserDto = {
       name: 'John Doe',
       email: 'john@example.com',
       password: 'mypassword',
+      password_hash: '', // No need for password_hash in this case since it's handled by the repository
+      createdAt: new Date(),
     };
 
-    // Cria o usuário manualmente
-    await userRepository.create(userData);
+    userRepository.findByEmail = jest.fn().mockResolvedValue(userData); // User already exists in the repository
 
-    // Chamada do caso de uso e verificação da exceção
-    await expect(registerUserUseCase.execute(userData)).rejects.toThrow();
+    await expect(registerUserUseCase.execute(userData)).rejects.toThrow(ConflictException);
+
+    expect(userRepository.findByEmail).toHaveBeenCalledWith(userData.email);
+    expect(userRepository.create).not.toHaveBeenCalled();
   });
 
   it('should throw InternalServerErrorException if userRepository.create throws an error', async () => {
-    // Dados do usuário
+    // Test case for handling repository create error
     const userData: UserDto = {
       name: 'John Doe',
       email: 'john@example.com',
       password: 'mypassword',
+      password_hash: '', // No need for password_hash in this case since it's handled by the repository
+      createdAt: new Date(),
     };
 
-    // Mock do bcrypt.hash para simular um erro ao hashear a senha
-    jest.spyOn(bcrypt, 'hash').mockRejectedValueOnce(new Error('Bcrypt error'));
+    userRepository.findByEmail = jest.fn().mockResolvedValue(null);
+    userRepository.create = jest.fn().mockRejectedValue(new Error('Database error')); // Simulate repository create error
 
-    // Chamada do caso de uso e verificação da exceção
-    await expect(registerUserUseCase.execute(userData)).rejects.toThrow();
+    await expect(registerUserUseCase.execute(userData)).rejects.toThrow(InternalServerErrorException);
+
+    expect(userRepository.findByEmail).toHaveBeenCalledWith(userData.email);
+    expect(userRepository.create).toHaveBeenCalledWith(userData);
   });
 });
+
+
+
+
+

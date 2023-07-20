@@ -1,14 +1,16 @@
 import * as bcrypt from "bcrypt";
 import { PrismaClient, User } from "@prisma/client";
 
-import { IUserRepository } from "@/users/domain/interfaces";
 import { UserDto } from "@/users/domain/dto";
+import { Injectable } from "@nestjs/common";
+import { IUserRepository } from "@/users/domain/interfaces";
 
+@Injectable()
 export class UserRepository implements IUserRepository {
-  private prisma: PrismaClient;
+  prisma: PrismaClient; 
 
   constructor() {
-    this.prisma = new PrismaClient();
+    this.prisma = new PrismaClient(); 
   }
 
   async create(data: UserDto): Promise<User | null> {
