@@ -11,9 +11,9 @@ describe("Soft Delete User", () => {
 
   beforeEach(async () => {
     inMemoryUserRepository = new InMemoryUserRepository();
+    softDeleteUserUseCase = new SoftDeleteUserUseCase(inMemoryUserRepository);
 
-    // Criar um usuário fictício com um ID válido
-    const user_id_here = "user_id_here";
+    const user_id_here = "123456";
     const fakeUser: User = {
       id: user_id_here,
       name: "John Doe",
@@ -23,18 +23,15 @@ describe("Soft Delete User", () => {
       deleted: false,
     };
 
-    // Configurar o mock para retornar o usuário fictício quando getUserById for chamado com o user_id_here
     jest
       .spyOn(inMemoryUserRepository, "getUserById")
       .mockResolvedValue(fakeUser);
 
-    softDeleteUserUseCase = new SoftDeleteUserUseCase(inMemoryUserRepository);
   });
   describe("Success Test", () => {
     it("should soft delete a user", async () => {
       const user_id = "user_id_here";
 
-      // Mockando o método getUserById para retornar um usuário encontrado
       jest.spyOn(inMemoryUserRepository, "getUserById").mockResolvedValue({
         id: user_id,
         name: "John Doe",
@@ -44,7 +41,6 @@ describe("Soft Delete User", () => {
         deleted: null,
       });
 
-      // Mockando o método softDeleteUser para retornar sucesso
       jest
         .spyOn(inMemoryUserRepository, "softDeleteUser")
         .mockResolvedValue(undefined);
@@ -53,10 +49,8 @@ describe("Soft Delete User", () => {
         softDeleteUserUseCase.execute(user_id)
       ).resolves.toBeUndefined();
 
-      // Verificando se o método getUserById foi chamado com o user_id correto
       expect(inMemoryUserRepository.getUserById).toHaveBeenCalledWith(user_id);
 
-      // Verificando se o método softDeleteUser foi chamado com o user_id correto
       expect(inMemoryUserRepository.softDeleteUser).toHaveBeenCalledWith(
         user_id
       );
