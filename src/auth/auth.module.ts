@@ -27,7 +27,6 @@ import { IRefreshTokenRepository } from "@/token/domain/interfaces";
     }),
     UsersModule,
   ],
-  controllers: [UsersController, TokenController],
   providers: [
     RefreshTokenRepository,
     UserRepository,
@@ -52,5 +51,12 @@ import { IRefreshTokenRepository } from "@/token/domain/interfaces";
       useClass: RefreshTokenRepository,
     },
   ],
+  exports: [
+    {
+      provide: ILoginRepository,
+      useClass: LoginRepository,
+    },
+  ],
+  controllers: [UsersController, TokenController],
 })
 export class AuthModule {}

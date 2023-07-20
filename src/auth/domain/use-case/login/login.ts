@@ -5,14 +5,14 @@ import * as bcrypt from 'bcrypt'
 
 import { JwtPayloadDto } from '../../dto';
 import { UserTokenDto, RefreshPayloadDto } from '@/token/domain/dto';
-import { LoginRepository } from '@/auth/infra/repositories/prisma/login-repository';
 import { HttpExceptionConstants } from '@/shared/constants';
+import { ILoginRepository } from '../../interfaces/login-repository';
 
 @Injectable()
 export class Login {
   constructor(
     private jwtService: JwtService,
-    private refreshTokenRepository: LoginRepository, 
+    private refreshTokenRepository: ILoginRepository, 
   ) {}
 
   async execute(email: string, password: string): Promise<UserTokenDto> {

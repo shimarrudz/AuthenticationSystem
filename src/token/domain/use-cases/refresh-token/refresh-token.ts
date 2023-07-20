@@ -2,16 +2,16 @@ import { Injectable, UnauthorizedException, NotFoundException } from '@nestjs/co
 import { JwtService } from '@nestjs/jwt';
 import * as jwt from 'jsonwebtoken';
 
-import { RefreshTokenRepository } from '@/token/infra/repositories/prisma';
 import { JwtPayloadDto, UserFromJwtDto } from '@/auth/domain/dto';
 import { RefreshPayloadTokenDto } from '../../dto';
 import { HttpExceptionConstants } from '@/shared/constants';
+import { IRefreshTokenRepository } from '../../interfaces';
 
 @Injectable()
 export class Refresh {
   constructor(
     private jwtService: JwtService,
-    private refreshTokenRepository: RefreshTokenRepository,
+    private refreshTokenRepository: IRefreshTokenRepository,
   ) {}
 
   async execute(refreshToken: string): Promise<RefreshPayloadTokenDto> {
@@ -32,8 +32,6 @@ export class Refresh {
 
     try {
       const decodedToken: any = jwt.verify(refreshToken, process.env.JWT_SECRET);
-
-      console.log('DECODED TOKEN:', decodedToken);
 
       const user = await this.refreshTokenRepository.findUserById(decodedToken.sub);
 

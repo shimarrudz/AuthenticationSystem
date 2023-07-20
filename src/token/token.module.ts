@@ -9,6 +9,7 @@ import { RefreshTokenRepository } from "./infra/repositories/prisma";
 import { IRefreshTokenRepository } from "./domain/interfaces";
 import { IUserRepository } from "@/users/domain/interfaces";
 import { UserRepository } from "@/users/infra/repositories";
+import { ILoginRepository } from "@/auth/domain/interfaces/login-repository";
 
 @Module({
   imports: [
@@ -29,7 +30,11 @@ import { UserRepository } from "@/users/infra/repositories";
     {
       provide: IUserRepository,
       useClass: UserRepository,
-    }
+    },
+    {
+      provide: ILoginRepository,
+      useClass: LoginRepository,
+    },
   ],
   exports: [
     {

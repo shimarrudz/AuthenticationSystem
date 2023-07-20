@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { User } from "@prisma/client";
 
-import { UserRepository } from "@/users/infra/repositories";
+import { IUserRepository } from "../../interfaces";
 import { HttpExceptionConstants } from "@/shared/constants";
 
 @Injectable()
 export class GetUserUseCase {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(private readonly userRepository: IUserRepository) {}
 
   async execute(user_id: string): Promise<User> {
     const user = await this.userRepository.getUserById(user_id);
