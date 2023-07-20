@@ -10,15 +10,22 @@ import { LoginRepository } from "./infra/repositories/prisma";
 import { RefreshTokenRepository } from "@/token/infra/repositories/prisma";
 import { Login } from "./domain/use-case";
 import { Refresh } from "@/token/domain/use-cases";
-import { RegisterUserUseCase, GetUserUseCase, SoftDeleteUserUseCase } from "@/users/domain/use-cases";
+import {
+  RegisterUserUseCase,
+  GetUserUseCase,
+  SoftDeleteUserUseCase,
+} from "@/users/domain/use-cases";
+import { ILoginRepository } from "./domain/interfaces/login-repository";
+import { IUserRepository } from "@/users/domain/interfaces";
+import { IRefreshTokenRepository } from "@/token/domain/interfaces";
 
 @Module({
   imports: [
     JwtModule.register({
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '10m' },
+      signOptions: { expiresIn: "10m" },
     }),
-    UsersModule, 
+    UsersModule,
   ],
   controllers: [UsersController, TokenController],
   providers: [
@@ -32,6 +39,18 @@ import { RegisterUserUseCase, GetUserUseCase, SoftDeleteUserUseCase } from "@/us
     JwtAuthGuard,
     JwtStrategy,
     LoginRepository,
+    {
+      provide: ILoginRepository,
+      useClass: LoginRepository,
+    },
+    {
+      provide: IUserRepository,
+      useClass: UserRepository,
+    },
+    {
+      provide: IRefreshTokenRepository,
+      useClass: RefreshTokenRepository,
+    },
   ],
 })
 export class AuthModule {}
