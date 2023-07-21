@@ -1,53 +1,42 @@
-import { HttpStatus, INestApplication } from '@nestjs/common';
-import { Test } from '@nestjs/testing';
-import * as request from 'supertest';
-import { AppModule } from '@/app.module';
-import { InMemoryUserRepository } from '@/users/domain/test/in-memory';
-import { RegisterUserDto, UserDto } from '@/users/domain/dto';
-import { RegisterUserUseCase } from '@/users/domain/use-cases';
+import { Controller, Post, Get, Delete, Param, Body, UseGuards } from '@nestjs/common';
 
-describe('UsersController (e2e)', () => {
-  let app: INestApplication;
-  let inMemoryUserRepository: InMemoryUserRepository;
-  let registerUserUseCase: RegisterUserUseCase;
+import { JwtAuthGuard } from '@/auth/domain/guards';
+import { RegisterUserDto, UserDto, UserDeletedDto } from '@/users/domain/dto';
+import { RegisterUserUseCase, GetUserUseCase, SoftDeleteUserUseCase } from '@/users/domain/use-cases';
 
-  beforeEach(async () => {
-    inMemoryUserRepository = new InMemoryUserRepository();
-    registerUserUseCase = new RegisterUserUseCase(inMemoryUserRepository);
+@Controller('users')
+export class UsersController {
+  constructor(
+    private readonly registerUserUseCase: RegisterUserUseCase,
+    private readonly getUserUseCase: GetUserUseCase,
+    private readonly softDeleteUseCase: SoftDeleteUserUseCase
+    ) {}
 
-    const moduleFixture = await Test.createTestingModule({
-      imports: [AppModule],
-    })
-      .overrideProvider(RegisterUserUseCase)
-      .useValue(registerUserUseCase)
-      .compile();
-
-    app = moduleFixture.createNestApplication();
-    await app.init();
-  });
-
-  afterEach(async () => {
-    await app.close();
-  });
-
-  it('should register a new user', async () => {
-    const createUserDto: RegisterUserDto = {
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      password: 'My@password123',
+  @Post('signup')
+  async create(@Body() createUserDto: RegisterUserDto): Promise<any> {
+    const user: UserDto = {
+      name: createUserDto.name,
+      email: createUserDto.email,
+      password: createUserDto.password,
+      password_hash: '',
+      createdAt: new Date(),
     };
+    await this.registerUserUseCase.execute(user);
+    return { message: 'User created successfully' };
+  }
 
-    const response = await request(app.getHttpServer())
-      .post('/users/signup')
-      .send(createUserDto)
-      .expect(HttpStatus.CREATED);
 
-    expect(response.body).toEqual({ message: 'User created successfully' });
+  @Get('list/:id')
+  @UseGuards(JwtAuthGuard)
+  async getUser(@Param('id') user_id: string): Promise<UserDeletedDto> {
+    return this.getUserUseCase.execute(user_id)
+  }
 
-    // Verifique se o usuário foi realmente registrado no repositório
-    const registeredUser = await inMemoryUserRepository.findByEmail(createUserDto.email);
-    expect(registeredUser).toBeDefined();
-    expect(registeredUser?.name).toBe(createUserDto.name);
-    expect(registeredUser?.email).toBe(createUserDto.email);
-  });
-});
+  @UseGuards(JwtAuthGuard)
+  @Delete('delete/:id')
+  async deleteUser(@Param('id') user_id: string): Promise<{ message: string }> {
+    await this.softDeleteUseCase.execute(user_id);
+    return { message: 'User soft deleted successfully' };
+  }
+}
+

@@ -3,7 +3,7 @@ import { Module } from "@nestjs/common";
 
 import { JwtStrategy } from "./domain/strategies";
 import { UsersModule } from "@/users/users.module";
-import { UsersController, TokenController } from "@/shared/infra/http";
+import { TokenController, UsersController } from "@/shared/infra/http";
 import { UserRepository } from "@/users/infra/repositories";
 import { JwtAuthGuard } from "./domain/guards";
 import { LoginRepository } from "./infra/repositories/prisma";
