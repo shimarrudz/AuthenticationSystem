@@ -11,6 +11,7 @@ import {
   ApiOperation,
   ApiSecurity,
   ApiTags,
+  ApiBody,
 } from "@nestjs/swagger";
 
 @Controller("token")
@@ -26,8 +27,17 @@ export class TokenController {
     description:
       "This route validate user login, to generate access and refresh token",
   })
+  @ApiBody({
+    schema: {
+      type: "object",
+      properties: {
+        email: { type: "string", example: "user@example.com" },
+        password: { type: "string", example: "gcb123" },
+      },
+      required: ["email", "password"],
+    },
+  })
   @ApiOkResponse({
-    status: HttpStatus.OK,
     schema: {
       type: "object",
       properties: {
@@ -62,6 +72,16 @@ export class TokenController {
   @ApiOperation({
     summary: "Refresh authencticate token",
     description: "This route allows that user refresh, to refresh token",
+  })
+  @ApiBody({
+    schema: {
+      type: "object",
+      properties: {
+        refreshToken: { type: "string", example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyZDBiNDExYS0zODI0LTQwNjMtOGU4MS1kN2IwNjdhMDI4ZDIiLCJpYXQiOjE2ODk5MTU3MjMsImV4cCI6MTY4OTkxNTkwM30.Bc153HQvNgPl8tZhlNpmK_OsboU9WuONyvufaeKkVS4" },
+        accessToken: { type: "bearer", example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyZDBiNDExYS0zODI0LTQwNjMtOGU4MS1kN2IwNjdhMDI4ZDIiLCJpYXQiOjE2ODk5MTU3MjMsImV4cCI6MTY4OTkxNTkwM30.Bc153HQvNgPl8tZhlNpmK_OsboU9WuONyvufaeKkVS4" },
+      },
+      required: ["email", "password"],
+    },
   })
   @ApiOkResponse({
     status: HttpStatus.OK,
