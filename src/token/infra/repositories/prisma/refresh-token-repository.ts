@@ -31,8 +31,4 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
 
     return refreshToken;
   }
-
-  async revokeRefreshToken(token: string): Promise<void> {
-    await this.prisma.refreshToken.delete({ where: { token: token } });
-  }
 }

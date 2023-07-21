@@ -1,40 +1,31 @@
 import { UserFromJwtDto } from "@/auth/domain/dto";
 import { IRefreshTokenRepository } from "../../interfaces";
-import { PrismaClient, RefreshToken } from "@prisma/client";
+import { RefreshToken } from "@prisma/client";
 
 export class InMemoryRefreshToken implements IRefreshTokenRepository {
-  private prisma: PrismaClient;
   private refreshTokens: RefreshToken[];
 
   constructor() {
-    this.prisma = new PrismaClient();
     this.refreshTokens = [];
   }
 
   async findUserById(userId: string): Promise<UserFromJwtDto | null> {
-    const user = await this.prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-      select: {
-        id: true,
-        email: true,
-      },
-    });
+    // Procurar o token do usuário pelo userId no objeto de tokens
+    const token = this.refreshTokens[userId];
 
-    return user ? { id: user.id, email: user.email } : null;
+    if (token) {
+      // Se encontrarmos o token, podemos retornar informações do usuário fictícias
+      return { id: userId, email: "exemplo@example.com" };
+    }
+
+    return null; // Se não encontrarmos o token, retornamos null indicando que o usuário não existe
   }
 
   async findRefreshToken(token: string): Promise<RefreshToken | null> {
-    const refreshToken = await this.prisma.refreshToken.findUnique({
-      where: {
-        token: token,
-      },
-    });
-
+    // Implement the logic to find the refresh token here using the in-memory approach
+    // For in-memory implementation, you can use the refreshTokens array to find the refresh token by its token value
+    const refreshToken = this.refreshTokens.find((token) => token === token);
     return refreshToken || null;
   }
-  async saveRefreshToken(refreshToken: RefreshToken): Promise<void> {
-    this.refreshTokens.push(refreshToken);
-  }
+
 }

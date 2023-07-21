@@ -3,14 +3,14 @@ import { Test } from "@nestjs/testing";
 import * as request from "supertest";
 import { AppModule } from "@/app.module";
 import { InMemoryUserRepository } from "@/users/domain/test/in-memory";
-import { RegisterUserDto, UserDto } from "@/users/domain/dto";
+import { UserDto } from "@/users/domain/dto";
 
 describe("UsersController (e2e)", () => {
   let app: INestApplication;
   let inMemoryUserRepository: InMemoryUserRepository;
 
   beforeEach(() => {
-    inMemoryUserRepository.users = []; // Limpar o array de usuários antes de cada teste
+    inMemoryUserRepository = new InMemoryUserRepository();
   });
 
   beforeAll(async () => {
@@ -20,8 +20,6 @@ describe("UsersController (e2e)", () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
-
-    inMemoryUserRepository = new InMemoryUserRepository();
   });
 
   afterAll(async () => {
@@ -29,17 +27,22 @@ describe("UsersController (e2e)", () => {
   });
 
   it("should register a new user", async () => {
-    const createUserDto: RegisterUserDto = {
-      name: "John Doe",
-      email: "john.doe@example.com",
-      password: "My@password123",
+    const createUserDto: UserDto = {
+      name: "Victor Shimada",
+      email: "jdee@gmsssail.com",
+      password: "Password@1234",
+      password_hash: '',
+      createdAt: new Date(),
     };
 
     const response = await request(app.getHttpServer())
       .post("/users/signup")
       .send(createUserDto);
+
     expect(response.status).toBe(HttpStatus.CREATED);
 
+    const createdUser = await inMemoryUserRepository.create(createUserDto);
+    expect(createdUser).toBeDefined();
     expect(response.body).toEqual({ message: "User created successfully" });
   });
 });

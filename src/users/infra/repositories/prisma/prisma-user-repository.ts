@@ -7,10 +7,10 @@ import { IUserRepository } from "@/users/domain/interfaces";
 
 @Injectable()
 export class UserRepository implements IUserRepository {
-  prisma: PrismaClient;
+  prisma: PrismaClient; // Declare a propriedade prisma aqui
 
   constructor() {
-    this.prisma = new PrismaClient();
+    this.prisma = new PrismaClient(); // Inicialize a propriedade prisma aqui
   }
 
   async create(data: UserDto): Promise<User | null> {
@@ -28,7 +28,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    const user = await this.prisma.user.findUnique({ where: { email } });
+    const user = await this.prisma.user.findUnique({ where: { email} });
     return user;
   }
 
