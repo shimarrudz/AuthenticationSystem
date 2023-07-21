@@ -5,7 +5,7 @@ import { Login } from '@/auth/domain/use-case';
 import { Refresh } from '@/token/domain/use-cases';
 import { UserTokenDto, RefreshPayloadTokenDto } from '@/token/domain/dto';
 
-@Controller('auth')
+@Controller('token')
 export class TokenController {
   constructor(
     private readonly loginUseCase: Login,
