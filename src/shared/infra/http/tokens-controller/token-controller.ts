@@ -23,7 +23,8 @@ export class TokenController {
   @ApiTags("Login")
   @ApiOperation({
     summary: "User login",
-    description: "This route validate user login, to generate access and refresh token",
+    description:
+      "This route validate user login, to generate access and refresh token",
   })
   @ApiOkResponse({
     status: HttpStatus.OK,
@@ -31,8 +32,8 @@ export class TokenController {
       type: "object",
       properties: {
         email: {
-         type: "string",
-         example: "vic.shima.vss@gmail.com"
+          type: "string",
+          example: "vic.shima.vss@gmail.com",
         },
         refreshToken: {
           type: "string",
