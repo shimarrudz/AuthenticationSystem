@@ -10,6 +10,7 @@ import {
 import { IUserRepository } from "./domain/interfaces";
 import { IRefreshTokenRepository } from "@/token/domain/interfaces";
 import { RefreshTokenRepository } from "@/token/infra/repositories/prisma";
+import { InMemoryUserRepository } from "./domain/test/in-memory";
 
 @Module({
   providers: [
@@ -17,6 +18,7 @@ import { RefreshTokenRepository } from "@/token/infra/repositories/prisma";
     UserRepository,
     GetUserUseCase,
     SoftDeleteUserUseCase,
+    InMemoryUserRepository,
     {
       provide: IUserRepository,
       useClass: UserRepository,

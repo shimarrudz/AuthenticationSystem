@@ -1,19 +1,19 @@
 import * as bcrypt from "bcrypt";
-import { User } from "@prisma/client";
-import { UserDto } from "@/users/domain/dto";
+import { IUserEntity } from "test-e2e/dto/register-user-dto";
+import { IUserDto } from "test-e2e/dto/user-dto";
 import { IUserRepository } from "../../interfaces";
 
 export class InMemoryUserRepository implements IUserRepository {
-  private users: User[] = [];
+  private users: IUserEntity[] = [];
 
-  async create(data: UserDto): Promise<User | null> {
+  async create(data: IUserDto): Promise<IUserEntity | null> {
     const existingUser = this.users.find((user) => user.email === data.email);
     if (existingUser) {
       throw new Error("E-mail already in use");
     }
 
     const passwordHash = await bcrypt.hash(data.password, 10);
-    const newUser: User = {
+    const newUser: IUserEntity = {
       id: Math.random().toString(),
       name: data.name,
       email: data.email,
@@ -26,12 +26,12 @@ export class InMemoryUserRepository implements IUserRepository {
     return newUser;
   }
 
-  async findByEmail(email: string): Promise<User | null> {
+  async findByEmail(email: string): Promise<IUserEntity | null> {
     const user = this.users.find((user) => user.email === email && !user.deleted);
     return user || null;
   }
 
-  async getUserById(id: string): Promise<User | null> {
+  async getUserById(id: string): Promise<IUserEntity | null> {
     const user = this.users.find((user) => user.id === id && !user.deleted);
     return user || null;
   }

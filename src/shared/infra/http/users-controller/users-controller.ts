@@ -16,14 +16,7 @@ import {
   GetUserUseCase,
   SoftDeleteUserUseCase,
 } from "@/users/domain/use-cases";
-import {
-  ApiBearerAuth,
-  ApiNotFoundResponse,
-  ApiOkResponse,
-  ApiOperation,
-  ApiSecurity,
-  ApiTags,
-} from "@nestjs/swagger";
+import { ApiBearerAuth, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiSecurity, ApiTags } from "@nestjs/swagger";
 
 @Controller("users")
 export class UsersController {
@@ -33,49 +26,51 @@ export class UsersController {
     private readonly softDeleteUseCase: SoftDeleteUserUseCase
   ) {}
 
-  @ApiTags("Users")
+  @ApiTags('Users')
   @ApiBearerAuth()
-  @ApiSecurity("Bearer")
+  @ApiSecurity('Bearer')
   @ApiOperation({
-    summary: "List an user by ID",
-    description: "This route allows user to list your personal data by ID.",
+    summary: 'List an user by ID',
+    description:
+      'This route allows user to list your personal data by ID.',
   })
   @ApiOkResponse({
     status: HttpStatus.CREATED,
-    description: "User success registered!",
+    description: 'User success registered!',
     schema: {
-      type: "object",
+      type: 'object',
       properties: {
         id: {
-          type: "string",
-          example: "ee6891a0-d199-480d-8c20-3f423e08d810",
+          type: 'string',
+          example: 'ee6891a0-d199-480d-8c20-3f423e08d810',
         },
         name: {
-          type: "string",
-          example: "Victor Shimada",
+          type: 'string',
+          example: 'Victor Shimada',
         },
         email: {
-          type: "string",
-          example: "vic.shima@gmail.com",
+          type: 'string',
+          example: 'vic.shima@gmail.com',
         },
         password: {
-          type: "string",
-          example: "Password@1234",
+          type: 'string',
+          example:
+            'Password@1234',
         },
         deleted: {
-          type: "boolean",
+          type: 'boolean',
           example: false,
         },
         created_at: {
-          type: "timestamp",
-          example: "2023-03-29T00:02:05.494Z",
+          type: 'timestamp',
+          example: '2023-03-29T00:02:05.494Z',
         },
       },
     },
   })
   @ApiNotFoundResponse({
     status: HttpStatus.BAD_REQUEST,
-    description: "Failure registring user!",
+    description: 'Failure registring user!',
   })
   @Post("signup")
   async create(@Body() createUserDto: RegisterUserDto): Promise<any> {
@@ -90,28 +85,29 @@ export class UsersController {
     return { message: "User created successfully" };
   }
 
-  @ApiTags("Users")
+  @ApiTags('Users')
   @ApiBearerAuth()
-  @ApiSecurity("Bearer")
+  @ApiSecurity('Bearer')
   @ApiOperation({
-    summary: "List an user by ID",
-    description: "This route allows user to list your personal data by ID.",
+    summary: 'List an user by ID',
+    description:
+      'This route allows user to list your personal data by ID.',
   })
   @ApiOkResponse({
     status: HttpStatus.OK,
     schema: {
-      type: "object",
+      type: 'object',
       properties: {
         id: {
-          type: "string",
-          example: "ee6891a0-d199-480d-8c20-3f423e08d810",
+          type: 'string',
+          example: 'ee6891a0-d199-480d-8c20-3f423e08d810',
         },
       },
     },
   })
   @ApiNotFoundResponse({
     status: HttpStatus.NOT_FOUND,
-    description: "User not found!",
+    description: 'User not found!',
   })
   @Get("list/:id")
   @UseGuards(JwtAuthGuard)
@@ -119,28 +115,29 @@ export class UsersController {
     return this.getUserUseCase.execute(user_id);
   }
 
-  @ApiTags("Users")
+  @ApiTags('Users')
   @ApiBearerAuth()
-  @ApiSecurity("Bearer")
+  @ApiSecurity('Bearer')
   @ApiOperation({
-    summary: "Soft delete an user by ID",
-    description: "This route allows user to soft delete an user by ID.",
+    summary: 'Soft delete an user by ID',
+    description:
+      'This route allows user to soft delete an user by ID.',
   })
   @ApiOkResponse({
     status: HttpStatus.OK,
     schema: {
-      type: "object",
+      type: 'object',
       properties: {
         id: {
-          type: "string",
-          example: "ee6891a0-d199-480d-8c20-3f423e08d810",
+          type: 'string',
+          example: 'ee6891a0-d199-480d-8c20-3f423e08d810',
         },
       },
     },
   })
   @ApiNotFoundResponse({
     status: HttpStatus.NOT_FOUND,
-    description: "User not found!",
+    description: 'User not found!',
   })
   @UseGuards(JwtAuthGuard)
   @Delete("delete/:id")

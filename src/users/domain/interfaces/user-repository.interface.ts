@@ -1,4 +1,4 @@
-import { User, PrismaClient } from "@prisma/client";
+import { User } from "@prisma/client";
 import { UserDto } from "@/users/domain/dto";
 
 export abstract class IUserRepository {

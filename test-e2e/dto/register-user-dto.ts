@@ -1,3 +1,9 @@
-import { UserDto } from "@/users/domain/dto";
-
-export interface ITRegisterUserDto extends Pick<UserDto, "name" | "email" | "password"> {}
+export interface IUserEntity {
+    id: string;
+    name: string;
+    email: string;
+    password_hash: string;
+    created_at: Date;
+    deleted: boolean;
+  }
+  
