@@ -1,7 +1,7 @@
 import { RefreshToken, User, PrismaClient } from "@prisma/client";
 
 export abstract class ILoginRepository {
-  prisma: PrismaClient
+  prisma: PrismaClient;
   abstract createRefreshToken(
     token: string,
     userId: string,

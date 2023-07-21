@@ -1,6 +1,11 @@
-import { registerDecorator, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import {
+  registerDecorator,
+  ValidationOptions,
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+} from "class-validator";
 
-@ValidatorConstraint({ name: 'customEmail', async: false })
+@ValidatorConstraint({ name: "customEmail", async: false })
 export class CustomEmailValidator implements ValidatorConstraintInterface {
   validate(email: string) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -8,14 +13,14 @@ export class CustomEmailValidator implements ValidatorConstraintInterface {
   }
 
   defaultMessage() {
-    return 'Invalid email format';
+    return "Invalid email format";
   }
 }
 
 export function IsCustomEmail(validationOptions?: ValidationOptions) {
   return function (object: Object, propertyName: string) {
     registerDecorator({
-      name: 'isCustomEmail',
+      name: "isCustomEmail",
       target: object.constructor,
       propertyName: propertyName,
       options: validationOptions,

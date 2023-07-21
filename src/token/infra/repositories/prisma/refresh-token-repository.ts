@@ -3,8 +3,6 @@ import { UserFromJwtDto } from "@/auth/domain/dto";
 import { IRefreshTokenRepository } from "@/token/domain/interfaces";
 import { PrismaClient, RefreshToken } from "@prisma/client";
 
-
-
 export class RefreshTokenRepository implements IRefreshTokenRepository {
   private prisma: PrismaClient;
 
@@ -22,7 +20,7 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
         email: true,
       },
     });
-  
+
     return user ? { id: user.id, email: user.email } : null;
   }
 
@@ -30,12 +28,11 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
     const refreshToken = await this.prisma.refreshToken.findUnique({
       where: { token: token },
     });
-  
-    return refreshToken; 
+
+    return refreshToken;
   }
-  
+
   async revokeRefreshToken(token: string): Promise<void> {
     await this.prisma.refreshToken.delete({ where: { token: token } });
   }
 }
-

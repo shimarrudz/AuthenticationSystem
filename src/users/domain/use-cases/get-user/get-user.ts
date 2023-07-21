@@ -14,7 +14,7 @@ export class GetUserUseCase {
     if (!user) {
       throw new HttpException(
         HttpExceptionConstants.USER_NOT_FOUND.message,
-        HttpStatus.NOT_FOUND,
+        HttpStatus.NOT_FOUND
       );
     }
 

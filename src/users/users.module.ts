@@ -30,7 +30,7 @@ import { RefreshTokenRepository } from "@/token/infra/repositories/prisma";
     {
       provide: IUserRepository,
       useClass: UserRepository,
-    }
+    },
   ],
   controllers: [UsersController],
 })

@@ -26,7 +26,6 @@ describe("Soft Delete User", () => {
     jest
       .spyOn(inMemoryUserRepository, "getUserById")
       .mockResolvedValue(fakeUser);
-
   });
   describe("Success Test", () => {
     it("should soft delete a user", async () => {

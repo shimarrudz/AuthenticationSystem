@@ -25,9 +25,13 @@ describe("Register User", () => {
       };
 
       jest.spyOn(inMemoryUserRepository, "findByEmail").mockResolvedValue(null);
-      jest.spyOn(inMemoryUserRepository, "create").mockResolvedValue(userData as any);
+      jest
+        .spyOn(inMemoryUserRepository, "create")
+        .mockResolvedValue(userData as any);
 
-      await expect(registerUserUseCase.execute(userData)).resolves.not.toThrow();
+      await expect(
+        registerUserUseCase.execute(userData)
+      ).resolves.not.toThrow();
     });
   });
 
@@ -40,9 +44,11 @@ describe("Register User", () => {
         password_hash: "",
         createdAt: new Date(),
       };
-  
-      jest.spyOn(inMemoryUserRepository, "findByEmail").mockResolvedValue(existingUser as any);
-  
+
+      jest
+        .spyOn(inMemoryUserRepository, "findByEmail")
+        .mockResolvedValue(existingUser as any);
+
       const promise = registerUserUseCase.execute(existingUser);
       await expect(promise).rejects.toMatchObject({
         constructor: ConflictException,

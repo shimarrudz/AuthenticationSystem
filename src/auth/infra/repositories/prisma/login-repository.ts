@@ -7,7 +7,11 @@ export class LoginRepository {
     this.prisma = new PrismaClient();
   }
 
-  async createRefreshToken(token: string, userId: string, expiresAt: Date): Promise<RefreshToken> {
+  async createRefreshToken(
+    token: string,
+    userId: string,
+    expiresAt: Date
+  ): Promise<RefreshToken> {
     const refreshToken = this.prisma.refreshToken.create({
       data: {
         token,
@@ -26,7 +30,7 @@ export class LoginRepository {
 
     return refreshToken;
   }
-  
+
   async findUserByEmail(email: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({
       where: { email },

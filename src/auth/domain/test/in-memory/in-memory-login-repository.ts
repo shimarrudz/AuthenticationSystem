@@ -2,11 +2,11 @@ import { PrismaClient, RefreshToken, User } from "@prisma/client";
 import { ILoginRepository } from "../../interfaces/login-repository";
 
 export class InMemoryLoginRepository implements ILoginRepository {
-  prisma: PrismaClient; 
-  
+  prisma: PrismaClient;
+
   private refreshTokens: RefreshToken[];
   private users: User[];
-  
+
   constructor() {
     this.prisma = new PrismaClient();
     this.refreshTokens = [];

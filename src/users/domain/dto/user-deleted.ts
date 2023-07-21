@@ -1,5 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsEmail, IsNotEmpty, IsUUID, MaxLength, MinLength } from "class-validator";
+import {
+  IsBoolean,
+  IsEmail,
+  IsNotEmpty,
+  IsUUID,
+  MaxLength,
+  MinLength,
+} from "class-validator";
 import { IsCustomEmail } from "../utils";
 
 export class UserDeletedDto {
