@@ -55,5 +55,26 @@ describe("Register User", () => {
         message: HttpExceptionConstants.USER_ALREADY_EXISTS.message,
       });
     });
+
+    it("should be able to throw FAILED_TO_CREATE_USER when an error occurs during user creation", async () => {
+      const userData: UserDto = {
+        name: "John Doe",
+        email: "john.doe@example.com",
+        password: "My@password123",
+        password_hash: "",
+        createdAt: new Date(),
+      };
+
+      // Simule um erro durante a criação do usuário
+      jest.spyOn(inMemoryUserRepository, "findByEmail").mockResolvedValue(null);
+      jest
+        .spyOn(inMemoryUserRepository, "create")
+        .mockRejectedValue(new Error("Failed to create user"));
+
+      const promise = registerUserUseCase.execute(userData);
+      await expect(promise).rejects.toMatchObject({
+        message: HttpExceptionConstants.FAILED_TO_CREATE_USER.message,
+      });
+    });
   });
 });

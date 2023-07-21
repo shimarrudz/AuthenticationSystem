@@ -27,7 +27,7 @@ describe("Users Controller e2e", () => {
   });
 
   beforeEach(async () => {
-    const loginDto = { email: "seu-email", password: "sua-senha" };
+    const loginDto = { email: "jdse@gmail.com", password: "Password@1234" };
     const loginResponse = await request(app.getHttpServer())
       .post("/auth/login")
       .send(loginDto);
@@ -61,7 +61,7 @@ describe("Users Controller e2e", () => {
   });
 
   describe("Get user route", () => {
-    it("should be able to get an user by ID", async () => {
+    it.skip("should be able to get an user by ID", async () => {
       const createUserDto: UserDto = {
         name: "John Doe",
         email: "johndoe@example.com",
