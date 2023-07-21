@@ -4,6 +4,8 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class RegisterUserDto {
     @IsNotEmpty()
+    @MinLength(3)
+    @MaxLength(80)
     @ApiProperty({
         example: "Victor Shimada",
         description: "Name for register user request",

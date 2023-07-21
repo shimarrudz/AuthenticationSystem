@@ -5,7 +5,7 @@ export class LoginDto {
   @IsEmail()
   @ApiProperty({
     example: 'vic.shima@gmail.com',
-    description: 'E-mail adress that will be validated for logins',
+    description: 'E-mail adress that will be validated for login',
     type: 'string',
     required: true,
   })
@@ -14,7 +14,7 @@ export class LoginDto {
   @IsNotEmpty()
   @ApiProperty({
     example: 'Password@1234',
-    description: 'Password that will be validated for logins',
+    description: 'Password that will be validated for login',
     type: 'string',
     required: true,
   })

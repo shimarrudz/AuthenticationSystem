@@ -1,9 +1,11 @@
-import { IsNotEmpty, IsEmail, MinLength, MaxLength, IsStrongPassword } from 'class-validator'
+import { IsNotEmpty, IsEmail, MinLength, MaxLength, IsStrongPassword, IsDate } from 'class-validator'
 import { IsCustomEmail, IsCustomPassword } from '../utils';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UserDto {
     @IsNotEmpty()
+    @MinLength(3)
+    @MaxLength(80)
     @ApiProperty({
         example: "Victor Shimada",
         description: "Name for register user on database",
@@ -38,5 +40,6 @@ export class UserDto {
 
     password_hash: string;
     
+    @IsDate()
     createdAt: Date;
 }
