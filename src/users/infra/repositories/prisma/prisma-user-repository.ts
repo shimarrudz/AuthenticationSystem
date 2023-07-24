@@ -1,7 +1,6 @@
 import * as bcrypt from "bcrypt";
 import { PrismaClient, User } from "@prisma/client";
 
-import { RegisterUserDto } from "@/users/domain/dto";
 import { UserDto } from "@/users/domain/dto";
 import { Injectable } from "@nestjs/common";
 import { IUserRepository } from "@/users/domain/interfaces";
