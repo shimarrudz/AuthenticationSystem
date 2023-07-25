@@ -18,7 +18,7 @@ export class UserFromJwtDto {
   @IsCustomEmail()
   @ApiProperty({
     example: "vic.shima@gmail.com",
-    description: "E-mail for register user request",
+    description: "Email for register user request",
     type: "string",
     required: true,
   })

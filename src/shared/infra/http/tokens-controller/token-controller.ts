@@ -70,7 +70,7 @@ export class TokenController {
   @ApiBearerAuth()
   @ApiSecurity("Bearer")
   @ApiOperation({
-    summary: "Refresh authencticate token",
+    summary: "Refresh authenticate token",
     description: "This route allows that user refresh, to refresh token",
   })
   @ApiBody({

@@ -3,7 +3,7 @@ import { JwtService } from "@nestjs/jwt";
 import { User } from "@prisma/client";
 import * as bcrypt from "bcrypt";
 
-import { JwtPayloadDto } from "../../dto";
+import { JwtPayloadDto } from "@/auth//domain/dto";
 import { UserTokenDto, RefreshPayloadDto } from "@/token/domain/dto";
 import { HttpExceptionConstants } from "@/shared/constants";
 import { ILoginRepository } from "../../interfaces/login-repository";

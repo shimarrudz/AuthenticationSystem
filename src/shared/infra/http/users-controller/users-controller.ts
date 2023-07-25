@@ -36,7 +36,7 @@ export class UsersController {
   @ApiTags("Users")
   @ApiOperation({
     summary: "Register User",
-    description: "This route allows user to lregister your own account.",
+    description: "This route allows user to register your own account.",
   })
   @ApiOkResponse({
     status: HttpStatus.CREATED,
@@ -75,7 +75,7 @@ export class UsersController {
     status: HttpStatus.BAD_REQUEST,
     description: "Failure registring user!",
   })
-  @Post("signup")
+  @Post()
   async create(@Body() createUserDto: RegisterUserDto): Promise<any> {
     const user: UserDto = {
       name: createUserDto.name,
@@ -111,7 +111,7 @@ export class UsersController {
     status: HttpStatus.NOT_FOUND,
     description: "User not found!",
   })
-  @Get("list/:id")
+  @Get(":id")
   @UseGuards(JwtAuthGuard)
   async getUser(@Param("id") user_id: string): Promise<UserDeletedDto> {
     return this.getUserUseCase.execute(user_id);
@@ -141,7 +141,7 @@ export class UsersController {
     description: "User not found!",
   })
   @UseGuards(JwtAuthGuard)
-  @Delete("delete/:id")
+  @Delete(":id")
   async deleteUser(@Param("id") user_id: string): Promise<{ message: string }> {
     await this.softDeleteUseCase.execute(user_id);
     return { message: "User soft deleted successfully" };
