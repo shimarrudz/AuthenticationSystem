@@ -1,5 +1,4 @@
 import { UserFromJwtDto } from "@/auth/domain/dto";
-
 import { IRefreshTokenRepository } from "@/token/domain/interfaces";
 import { PrismaClient, RefreshToken } from "@prisma/client";
 
