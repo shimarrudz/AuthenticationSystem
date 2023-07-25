@@ -6,18 +6,18 @@ import { UsersModule } from "@/users/users.module";
 import { TokenController, UsersController } from "@/shared/infra/http";
 import { UserRepository } from "@/users/infra/repositories";
 import { JwtAuthGuard } from "./domain/guards";
-import { LoginRepository } from "./infra/repositories/prisma";
 import { RefreshTokenRepository } from "@/token/infra/repositories/prisma";
-import { Login } from "./domain/use-case";
 import { Refresh } from "@/token/domain/use-cases";
 import {
   RegisterUserUseCase,
   GetUserUseCase,
   SoftDeleteUserUseCase,
 } from "@/users/domain/use-cases";
-import { ILoginRepository } from "./domain/interfaces/login-repository";
+import { ILoginRepository } from "@/auth/domain/interfaces/login-repository";
 import { IUserRepository } from "@/users/domain/interfaces";
 import { IRefreshTokenRepository } from "@/token/domain/interfaces";
+import { LoginRepository } from "@/auth/infra/repositories/prisma/login-repository";
+import { Login } from "@/auth/domain/use-case";
 
 @Module({
   imports: [

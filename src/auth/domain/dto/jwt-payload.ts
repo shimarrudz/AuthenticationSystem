@@ -1,6 +1,7 @@
-import { IsCustomEmail } from "@/users/domain/utils";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty, IsUUID } from "class-validator";
+
+import { IsCustomEmail } from "@/users/domain/utils";
 
 export class JwtPayloadDto {
   @IsUUID()
