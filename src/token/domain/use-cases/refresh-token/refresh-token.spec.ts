@@ -1,8 +1,9 @@
 import { JwtService } from "@nestjs/jwt";
 import { UnauthorizedException, NotFoundException } from "@nestjs/common";
-import { Refresh } from "./refresh-token";
 import * as jwt from "jsonwebtoken";
-import { InMemoryRefreshToken } from "../../test/in-memory/in-memory-token-repository";
+
+import { Refresh } from "@/token/domain/use-cases";
+import { InMemoryRefreshToken } from "@/token/domain/test/in-memory/in-memory-token-repository";
 
 describe("Refresh", () => {
   let refreshUseCase: Refresh;
