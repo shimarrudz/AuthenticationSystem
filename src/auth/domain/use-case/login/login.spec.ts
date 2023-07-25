@@ -37,8 +37,8 @@ describe("Login", () => {
 
     const result: UserTokenDto = await loginUseCase.execute(email, password);
 
-    expect(result.accessToken).toBeTruthy();
-    expect(result.refreshToken).toBeTruthy();
+    expect(result.access_token).toBeTruthy();
+    expect(result.refresh_token).toBeTruthy();
   });
 
   it("should be able to throw UnauthorizedException when email is not found", async () => {

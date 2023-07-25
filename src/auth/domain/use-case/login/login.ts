@@ -32,12 +32,12 @@ export class Login {
       );
     }
 
-    const accessToken = this.generateAccessToken(user.id, user.email);
-    const refreshToken = await this.generateRefreshToken(user.id);
+    const access_token = this.generateAccessToken(user.id, user.email);
+    const refresh_token = await this.generateRefreshToken(user.id);
 
     return {
-      accessToken,
-      refreshToken,
+      access_token,
+      refresh_token,
     };
   }
 

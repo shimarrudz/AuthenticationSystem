@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNotEmpty, MaxLength, MinLength } from "class-validator";
+import { IsNotEmpty, MaxLength, MinLength } from "class-validator";
 
 export class UserTokenDto {
   @IsNotEmpty()
@@ -12,7 +12,7 @@ export class UserTokenDto {
     type: "string",
     required: true,
   })
-  accessToken: string;
+  access_token: string;
 
   @IsNotEmpty()
   @MinLength(140)
@@ -24,5 +24,5 @@ export class UserTokenDto {
     type: "string",
     required: true,
   })
-  refreshToken: string;
+  refresh_token: string;
 }
