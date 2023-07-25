@@ -12,5 +12,5 @@ export class RefreshPayloadTokenDto {
     type: "string",
     required: true,
   })
-  accessToken: string;
+  access_token: string;
 }
